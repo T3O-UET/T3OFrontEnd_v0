@@ -35,7 +35,7 @@ const CategoryFilter = (props) => {
                 >
                     <Badge
                         style={(styles.center,
-                             {margin: 5},
+                             {margin: 10},
                             props.active == props.categories.indexOf(item) ? styles.active : styles.inactive
                             )}
                     >

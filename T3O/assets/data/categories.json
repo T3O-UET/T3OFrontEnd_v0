@@ -2,19 +2,19 @@
     "_id": {
       "$oid": "5f15d5cdcb4a6642bddc0fe9e"
     },
-    "name": "Nike",
+    "name": "Bitis",
     "__v": 0
   },{
     "_id": {
       "$oid": "5f15d545f3a046427a1c26e2"
     },
-    "name": "Adidas",
+    "name": "Basketball",
     "__v": 0
   },{
     "_id": {
       "$oid": "5f15d54cf3a046427a1c26e3"
     },
-    "name": "Thượng Đình",
+    "name": "Bata",
     "__v": 0
   },{
     "_id": {
@@ -26,12 +26,12 @@
     "_id": {
       "$oid": "5f15d5b7cb4a6642bddc0fe8"
     },
-    "name": "Sport",
+    "name": "Nike",
     "__v": 0
   },{
     "_id": {
       "$oid": "5f15d5cdcb4a6642bddc0fe9"
     },
-    "name": "Bitis",
+    "name": "Adidas",
     "__v": 0
   }]
