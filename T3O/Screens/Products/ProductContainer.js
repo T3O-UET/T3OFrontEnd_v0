@@ -6,26 +6,39 @@ import { SearchBar } from 'react-native-elements';
 
 import ProductList from './ProductList';
 import SearchProduct from './SearchProduct';
-import Banner from '../../Shared/Banner'
+import Banner from '../../Shared/Banner';
+import CategoryFilter from './CategoryFilter';
 
 const data = require('../../assets/data/products.json');
+const productCategories = require('../../assets/data/categories.json');
+
 
 const ProductContainer = () => {
 
   const [products, setProducts ] = useState([]);
   const [productsFiltered, setproductsFiltered] = useState([]);
   const [focus, setFocus] = useState();
-
+  const [categories, setCategories] = useState([]);
+  const [active, setActive] = useState();
+  const [initialState, setInitialState] = useState([]);
+  const [productsCtg, setProductsCtg] = useState([]);
 
   useEffect(() => {
     setProducts(data);
     setproductsFiltered(data);
     setFocus(false);
+    setCategories(productCategories);
+    setActive(-1);
+    setInitialState(data);
+
 
     return () => {
       setProducts([])
       setproductsFiltered([])
       setFocus()
+      setCategories([])
+      setActive()
+      setInitialState()
     }
   }, [])
   const searchProduct = (text) => {
@@ -41,9 +54,23 @@ const ProductContainer = () => {
   const onBlur = () => {
     setFocus(false);
   }
-  const _onFocus = () => {
-
+  // const _onFocus = () => {
+  
+  // }
+  // Categories
+  const changeCtg = (ctg) => {
+    {
+      ctg === 'all' 
+        ? [setProductsCtg(initialState), setActive(true)]
+        : [
+            setProductsCtg(
+              products.filter((i) => i.category.$oid === ctg),
+              setActive(true)
+            )
+        ]
+    }
   }
+
   return (
     <ScrollView>
     <View>
@@ -77,16 +104,16 @@ const ProductContainer = () => {
         <Item>
           <Icon name="ios-search"/> */}
           <SearchBar
-            searchIcon={{ size: 30 }}
+            
             showLoading={false}
             platform={Platform.OS}
             // clearIcon={true}
             // value={search}
-            inputStyle={{backgroundColor: '#EEEEEE'}}
+            inputStyle={{backgroundColor: '#EEEEEE', marginLeft: 12}}
             containerStyle={{backgroundColor: 'white'}}
             // placeholderTextColor={'#g5g5g5'}
-            round
-            searchIcon={{ size: 20 }}
+            style={styles.searchBar}
+            searchIcon={{ size: 30 }}
             placeholder="Search"
             onFocus={openList}
             onChangeText={(text) => searchProduct(text)}
@@ -104,6 +131,15 @@ const ProductContainer = () => {
           <View >
             <View>
               <Banner />
+            </View>
+            <View>
+              <CategoryFilter 
+                categories={categories}
+                CategoryFilter={changeCtg}
+                productsCtg={productsCtg}
+                active={active}
+                setActive={setActive}
+              />
             </View>
             <View style={styles.listContainer}>
               <FlatList
@@ -135,6 +171,9 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     backgroundColor: 'gainsboro'
   },
+  searchBar: {
+    paddingLeft: 10,
+  }
   // header_safe_area: {
   //   zIndex: 1000
   // },
