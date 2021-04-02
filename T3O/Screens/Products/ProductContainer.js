@@ -4,6 +4,7 @@ import { Container, Header, Icon, Item, Input, Text} from 'native-base';
 
 import ProductList from './ProductList';
 import SearchProduct from './SearchProduct';
+import Banner from '../../Shared/Banner'
 
 const data = require('../../assets/data/products.json');
 
@@ -54,13 +55,15 @@ const ProductContainer = () => {
           ) : null}
         </Item>
       </Header>
-      {focus = true ? (
+      {focus == true ? (
         <SearchProduct
           productsFiltered={productsFiltered} 
           />
       ) : (
         <View style={styles.container}>
-          <Text>Product Container</Text>
+          <View>
+            <Banner />
+          </View>
           <View style={styles.listContainer}>
             <FlatList
               data={products}

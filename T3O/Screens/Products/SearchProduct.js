@@ -5,14 +5,13 @@ import { Content, Left, Body, ListItem, Thumbnail, Text} from 'native-base';
 var { width } = Dimensions.get("window")
 
 const SearchProduct = (props) => {
-    const { prosuctsFiltered } = props;
+    const { productsFiltered } = props;
     return (
         <Content style={{ width: width}}>
             {productsFiltered.length > 0 ? (
                 productsFiltered.map((item) => (
                     <ListItem
                         key={item._id.$oid}
-                        avatar
                     >
                         <Left>
                             <Thumbnail 

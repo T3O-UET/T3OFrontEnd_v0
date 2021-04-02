@@ -5,10 +5,9 @@ const Header = () => {
     return (
         <SafeAreaView style={styles.header}>
             <Image
-
+                style={styles.image}
                 source={require("../assets/logo.png")}
                 resizeMode="contain"
-                style={{ height: 70}}
             />
             <Text style={styles.title}>
                 T3OSHOP
@@ -25,10 +24,17 @@ const styles = StyleSheet.create({
         padding: 20,
         marginTop: 20
     },
+    image: {
+        height: 35,
+        width: 50,
+        paddingLeft: 10,
+        paddingBottom: 20
+    },
     title: {
         fontWeight: "bold",
-        fontSize: 24,
-        paddingRight: 30
+        fontSize: 22,
+        paddingRight: 30,
+        paddingBottom: 20
     }
 })
 
