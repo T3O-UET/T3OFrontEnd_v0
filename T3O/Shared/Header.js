@@ -10,7 +10,7 @@ const Header = () => {
                 resizeMode="contain"
             />
             <Text style={styles.title}>
-                T3OSHOP
+                T3O Store
             </Text>
         </SafeAreaView>
     )
