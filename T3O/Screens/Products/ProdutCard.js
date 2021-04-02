@@ -5,7 +5,8 @@ import {
         Dimensions,
         Image,
         Text,
-        Button
+        Button,
+        TouchableOpacity
 } from 'react-native'
 
 var { width } = Dimensions.get("window");
@@ -29,7 +30,15 @@ const ProductCard = (props) => {
             <Text style={styles.price}>${price}</Text>
             {   countInStock > 0 ? (
                 <View style={{ marginBottom: 20}}>
-                    <Button title={'Add'} color={'green'} />
+                    <TouchableOpacity onPress={() => {/* do this */ }}>
+                        <View style={{
+                            backgroundColor: 'green', alignItems: 'center',
+                            justifyContent: 'center', borderRadius: 4
+                        }}
+                        >
+                            <Text style={{ color: 'white', fontWeight:'bold', padding: 3 }}>ADD</Text>
+                        </View>
+                    </TouchableOpacity>
                 </View>
             ) : <Text style={{ marginTop: 20 }}>Currently Unavailable</Text>}
         </View>
@@ -69,6 +78,7 @@ const styles = StyleSheet.create({
         textAlign: 'left'
     },
     price: {
+        fontWeight:'bold',
         fontSize: 16,
         color: 'red',
         marginTop: 10,

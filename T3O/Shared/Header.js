@@ -21,20 +21,18 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignContent: "center",
         justifyContent: "center",
-        padding: 20,
+        paddingTop: 20,
         marginTop: 20
     },
     image: {
         height: 35,
         width: 50,
         paddingLeft: 10,
-        paddingBottom: 20
     },
     title: {
         fontWeight: "bold",
         fontSize: 22,
-        paddingRight: 30,
-        paddingBottom: 20
+        paddingRight: 30
     }
 })
 
