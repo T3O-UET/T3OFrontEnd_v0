@@ -1,5 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { ScrollView, View, StyleSheet, ActivityIndicator, FlatList, TouchableOpacity, SafeAreaView, TouchableHighlight } from 'react-native';
+import { 
+        ScrollView, 
+        View, 
+        StyleSheet, 
+        ActivityIndicator, 
+        FlatList, 
+        TouchableOpacity, 
+        SafeAreaView, 
+        TouchableHighlight,
+        Dimensions 
+        } from 'react-native';
 import { Container, Header, Icon, Item, Input, Text, Image, AnimatedView} from 'native-base';
 import { SearchBar } from 'react-native-elements';
 
@@ -9,6 +19,7 @@ import SearchProduct from './SearchProduct';
 import Banner from '../../Shared/Banner';
 import CategoryFilter from './CategoryFilter';
 
+var { height } = Dimensions.get("window")
 const data = require('../../assets/data/products.json');
 const productCategories = require('../../assets/data/categories.json');
 
@@ -28,6 +39,7 @@ const ProductContainer = () => {
     setproductsFiltered(data);
     setFocus(false);
     setCategories(productCategories);
+    setProductsCtg(data);
     setActive(-1);
     setInitialState(data);
 
@@ -141,15 +153,31 @@ const ProductContainer = () => {
                 setActive={setActive}
               />
             </View>
+            {productsCtg.length > 0 ? (
+              <View style={styles.listContainer}>
+                {productsCtg.map((item) => {
+                  return(
+                    <ProductList
+                      key={item._id.$oid}
+                      item={item}
+                    />
+                  )
+                })}
+              </View>
+            ) : (
+              <View style={styles.center, { height: '40%'}}>
+                <Text>No product found</Text>
+              </View>
+            )}
             <View style={styles.listContainer}>
-              <FlatList
+              {/* <FlatList
                 data={products}
                 numColumns={2}
                 renderItem={({item}) => <ProductList
                 key={item.brand}
                 item={item}/>}
                 keyExtractor={item => item.brand}
-              />
+              /> */}
             </View>
           </View>
       )}
@@ -173,6 +201,10 @@ const styles = StyleSheet.create({
   },
   searchBar: {
     paddingLeft: 10,
+  },
+  center: {
+    justifyContent: 'center',
+    alignContent: 'center'
   }
   // header_safe_area: {
   //   zIndex: 1000
