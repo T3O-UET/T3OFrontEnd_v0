@@ -11,7 +11,7 @@ const SingleProduct = (props) => {
             <ScrollView style={{ marginBottom: 80, padding: 5}}
             >
                 <View>
-                    <Text style={styles.tasbar}>Chi tiết đơn hàng</Text>
+                    <Text style={styles.tasbar}>Chi tiết sản phẩm</Text>
                     <Image 
                         source={{
                             uri: item.image ? item.image 

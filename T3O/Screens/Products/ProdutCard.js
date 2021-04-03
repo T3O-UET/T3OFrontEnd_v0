@@ -28,25 +28,24 @@ const ProductCard = (props) => {
                     + '...' : name    
             }
             </Text>
-            <Left>
+            <View style={styles.bottomCard}>
                 <Text style={styles.price}>${price}</Text>
-            </Left>
-            <Right>
                 {   countInStock > 0 ? (
-                    <View style={{ marginBottom: 20}}>
-                        <TouchableOpacity onPress={() => {/* do this */ }}>
-                            <View style={{
-                                backgroundColor: 'green', alignItems: 'center',
-                                justifyContent: 'center', borderRadius: 4
-                            }}
-                            >
-                                <Text style={{ color: 'white', fontWeight:'bold', padding: 3 }}>ADD</Text>
-                            </View>
-                        </TouchableOpacity>
-                    </View>
-                ) : <Text style={{ marginTop: 20 }}>Currently Unavailable</Text>}
-            </Right>
-            
+                        // <Button title="Add" />
+                        <View style={styles.button}>
+                            <TouchableOpacity onPress={() => {/* do this */ }}>
+                                <View style={{
+                                    backgroundColor: '#3399FF', alignItems: 'center',
+                                    justifyContent: 'center', borderRadius: 4
+                                }}
+                                >
+                                    <Text style={{ color: 'white', fontWeight:'bold', padding: 3 }}>ADD</Text>
+                                </View>
+                            </TouchableOpacity>
+                        </View>
+                    ) : <Text style={{ marginTop: 20 }}>Currently Unavailable</Text>
+                }
+            </View>           
         </View>
     )
 }
@@ -60,8 +59,8 @@ const styles = StyleSheet.create({
         marginTop: 50,
         marginBottom: 5,
         marginLeft: 10,
-        alignItems: 'center',
         elevation: 8,
+        alignItems: 'center',
         backgroundColor: 'white',
     },
     image: {
@@ -80,15 +79,17 @@ const styles = StyleSheet.create({
     },
     title: {
         fontWeight: 'bold',
-        fontSize: 14,
-        textAlign: 'left'
+        fontSize: 18,
+        textAlign: 'left',
+        textAlign: 'center'
     },
     price: {
         fontWeight:'bold',
-        fontSize: 16,
+        fontSize: 18,
         color: 'red',
-        marginTop: 10,
-        textAlign: 'right'
+    },
+    button: {
+        width: 60,
     }
 })
 export default ProductCard;
