@@ -8,6 +8,7 @@ import {
         Button,
         TouchableOpacity
 } from 'react-native'
+import { Left, Right, Container, H1} from 'native-base';
 
 var { width } = Dimensions.get("window");
 
@@ -27,20 +28,25 @@ const ProductCard = (props) => {
                     + '...' : name    
             }
             </Text>
-            <Text style={styles.price}>${price}</Text>
-            {   countInStock > 0 ? (
-                <View style={{ marginBottom: 20}}>
-                    <TouchableOpacity onPress={() => {/* do this */ }}>
-                        <View style={{
-                            backgroundColor: 'green', alignItems: 'center',
-                            justifyContent: 'center', borderRadius: 4
-                        }}
-                        >
-                            <Text style={{ color: 'white', fontWeight:'bold', padding: 3 }}>ADD</Text>
-                        </View>
-                    </TouchableOpacity>
-                </View>
-            ) : <Text style={{ marginTop: 20 }}>Currently Unavailable</Text>}
+            <Left>
+                <Text style={styles.price}>${price}</Text>
+            </Left>
+            <Right>
+                {   countInStock > 0 ? (
+                    <View style={{ marginBottom: 20}}>
+                        <TouchableOpacity onPress={() => {/* do this */ }}>
+                            <View style={{
+                                backgroundColor: 'green', alignItems: 'center',
+                                justifyContent: 'center', borderRadius: 4
+                            }}
+                            >
+                                <Text style={{ color: 'white', fontWeight:'bold', padding: 3 }}>ADD</Text>
+                            </View>
+                        </TouchableOpacity>
+                    </View>
+                ) : <Text style={{ marginTop: 20 }}>Currently Unavailable</Text>}
+            </Right>
+            
         </View>
     )
 }
