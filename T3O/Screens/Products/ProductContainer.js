@@ -24,7 +24,7 @@ const data = require('../../assets/data/products.json');
 const productCategories = require('../../assets/data/categories.json');
 
 
-const ProductContainer = () => {
+const ProductContainer = (props) => {
 
   const [products, setProducts ] = useState([]);
   const [productsFiltered, setproductsFiltered] = useState([]);
@@ -137,6 +137,7 @@ const ProductContainer = () => {
       </Header> */}
       {focus == true ? (
         <SearchProduct
+          navigation={props.navigation}
           productsFiltered={productsFiltered} 
           />
       ) : (
@@ -158,6 +159,7 @@ const ProductContainer = () => {
                 {productsCtg.map((item) => {
                   return(
                     <ProductList
+                      navigation={props.navigation}
                       key={item._id.$oid}
                       item={item}
                     />

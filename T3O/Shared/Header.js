@@ -22,16 +22,20 @@ const styles = StyleSheet.create({
         alignContent: "center",
         justifyContent: "center",
         paddingTop: 20,
-        marginTop: 20
+        marginTop: 25,
+        paddingBottom: 10,
+        // backgroundColor: Platform.OS === 'android' ? '#72bcd4' : '#ffffff',
+        // borderBottomColor: Platform.OS === 'android' ? '#ffffff' : '#72bcd4',
+        // borderBottomWidth: 1
     },
     image: {
-        height: 35,
-        width: 50,
+        height: 48,
+        width: 70,
         paddingLeft: 10,
     },
     title: {
         fontWeight: "bold",
-        fontSize: 22,
+        fontSize: 30,
         paddingRight: 30
     }
 })
