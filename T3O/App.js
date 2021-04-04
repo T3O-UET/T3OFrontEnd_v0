@@ -24,6 +24,7 @@ export default function App() {
       {/* <View style={styles.container}> */}
       <Header />
       <Main />
+      <Toast ref={(ref) => Toast.setRef(ref)} />
     {/* </View> */}
     </NavigationContainer>
     </Provider>
