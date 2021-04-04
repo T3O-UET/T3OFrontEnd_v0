@@ -8,6 +8,9 @@ import {
         Button,
         TouchableOpacity
 } from 'react-native'
+import { connect } from 'react-redux';
+import * as actions from '../../Redux/Actions/cartActions';
+
 import { Left, Right, Container, H1} from 'native-base';
 
 var { width } = Dimensions.get("window");
@@ -33,7 +36,9 @@ const ProductCard = (props) => {
                 {   countInStock > 0 ? (
                         // <Button title="Add" />
                         <View style={styles.button}>
-                            <TouchableOpacity onPress={() => {/* do this */ }}>
+                            <TouchableOpacity onPress={() => {
+                                 props.addItemToCart(props)
+                             }}>
                                 <View style={{
                                     backgroundColor: '#3399FF', alignItems: 'center',
                                     justifyContent: 'center', borderRadius: 4
@@ -48,6 +53,13 @@ const ProductCard = (props) => {
             </View>           
         </View>
     )
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addItemToCart: (product) => 
+            dispatch(actions.addToCart({quantity: 1, product}))
+    }
 }
 
 const styles = StyleSheet.create({
@@ -80,7 +92,7 @@ const styles = StyleSheet.create({
     title: {
         fontWeight: 'bold',
         fontSize: 18,
-        textAlign: 'left',
+        // textAlign: 'left',
         textAlign: 'center'
     },
     price: {
@@ -90,6 +102,8 @@ const styles = StyleSheet.create({
     },
     button: {
         width: 60,
+        backgroundColor: '#3399FF', alignItems: 'center',
+        justifyContent: 'center', borderRadius: 4
     }
 })
-export default ProductCard;
+export default connect(null, mapDispatchToProps)(ProductCard);
