@@ -3,6 +3,7 @@ import React from 'react';
 import { StyleSheet, Text, View , LogBox} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native'
 import { Root } from 'native-base'
+import Toast from "react-native-toast-message";
 
 //Redux
 import { Provider } from "react-redux";
