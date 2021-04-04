@@ -23,7 +23,7 @@ const ProductCard = (props) => {
             <Image 
             style={styles.image}
             resizeMode="contain"
-            source={{uri: image ? image : 'https://cdn.pixabay.com/photo/2012/04/01/17/29/box-23649_960_720.png'}}
+            source={{uri: image ? image : 'https://3wga6448744j404mpt11pbx4-wpengine.netdna-ssl.com/wp-content/uploads/2015/05/InternetSlowdown_Day.gif'}}
             />
             <View style={styles.card}/>
             <Text style={styles.title}>

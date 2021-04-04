@@ -31,7 +31,7 @@ const Cart = (props) => {
         <>
         {props.cartItems.length ? (
             <Container>
-                <H1 style={{ paddingLeft: 20}}>Your Cart</H1>
+                <H1  style={styles.taskbar}>Your Cart</H1>
                 <ScrollView>
                 {props.cartItems.map(data => {
                     return (
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
     image: {
         height: 100,
         width: 130,
-        paddingBottom: 20
+        paddingBottom: 20,
     },
     name: {
         fontSize: 14,
@@ -101,6 +101,11 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: 'red',
         paddingRight: 20
+    },
+    taskbar: {
+        fontSize: 24,
+        paddingTop: 20,
+        paddingLeft: 20
     }
 })
 const mapStateProps = (state) => {

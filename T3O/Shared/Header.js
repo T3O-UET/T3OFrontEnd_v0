@@ -24,6 +24,8 @@ const styles = StyleSheet.create({
         paddingTop: 20,
         marginTop: 25,
         paddingBottom: 10,
+        borderBottomColor: '#999999',
+        borderBottomWidth: 0.25
         // backgroundColor: Platform.OS === 'android' ? '#72bcd4' : '#ffffff',
         // borderBottomColor: Platform.OS === 'android' ? '#ffffff' : '#72bcd4',
         // borderBottomWidth: 1

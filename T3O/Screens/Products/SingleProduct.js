@@ -20,7 +20,7 @@ const SingleProduct = (props) => {
                     <Image 
                         source={{
                             uri: item.image ? item.image 
-                            : 'https://cdn.pixabay.com/photo/2012/04/01/17/29/box-23649_960_720.png'
+                            : 'https://3wga6448744j404mpt11pbx4-wpengine.netdna-ssl.com/wp-content/uploads/2015/05/InternetSlowdown_Day.gif'
                         }}
                         resizeMode="contain"
                         style={styles.image}
@@ -72,12 +72,12 @@ const styles = StyleSheet.create({
     },
     image: {
         width: '100%',
-        height: 300
+        height: 250
     },
     tasbar: {
-        fontSize: 20,
+        fontSize: 26,
         fontFamily: 'sans-serif',
-        fontWeight: 'bold'
+        // fontWeight: 'bold'
     },
     contentContainer: {
         marginTop: 20,
