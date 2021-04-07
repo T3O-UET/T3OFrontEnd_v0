@@ -20,6 +20,10 @@ import { ScrollView } from 'react-native-gesture-handler'
 var {height, width } = Dimensions.get("window")
 
 const Cart = (props) => {
+    var total = 0;
+    props.cartItems.forEach(cart => {
+        return (total += cart.product.price)        
+    });
     return (
         // <View style={{ flex: 1}}>
         //     {props.cartItems.map(x => {
@@ -58,6 +62,17 @@ const Cart = (props) => {
                     )
                 })}
                 </ScrollView>
+                <View style={styles.bottomContainer}>
+                    <Left>
+                        <Text style={styles.price}>${total}</Text>
+                    </Left>
+                    <Right>
+                        <Button title="Clear"/>
+                    </Right>
+                    <Right>
+                        <Button title="Checkout" onPress={() => props.navigation.navigate("Checkout")} />
+                    </Right>
+                </View>
             </Container>
         ): (
             <Container style={styles.emptyContainer}>
@@ -106,6 +121,16 @@ const styles = StyleSheet.create({
         fontSize: 24,
         paddingTop: 20,
         paddingLeft: 20
+    },
+    bottomContainer: {
+        flexDirection: 'row',
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+        backgroundColor: "white" ,
+        elevation: 20,
+        paddingTop: 5,
+        paddingBottom: 5
     }
 })
 const mapStateProps = (state) => {
