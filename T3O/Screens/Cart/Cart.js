@@ -16,7 +16,7 @@ import { SwipeListView } from 'react-native-swipe-list-view'
 import CartItem from './CartItem';
 
 import * as actions from '../../Redux/Actions/cartActions'
-import { ScrollView } from 'react-native-gesture-handler'
+// import { ScrollView } from 'react-native-gesture-handler'
 
 var {height, width } = Dimensions.get("window")
 
