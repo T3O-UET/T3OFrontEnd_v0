@@ -28,6 +28,7 @@
     "react-native-screens": "^3.0.0",
     "react-native-swipe-list-view": "^3.2.7",
     "react-native-swiper": "^1.6.0",
+    "react-native-tab-view": "^3.0.1",
     "react-native-toast-message": "^1.4.9",
     "react-native-web": "~0.13.12",
     "redux": "^4.0.5",
