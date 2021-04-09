@@ -65,7 +65,7 @@ const Payment = (props) => {
                <View style={{ marginTop: 60, alignSelf: 'center' }}>
                        <Button 
                        title={"Xác nhận"} 
-                       onPress={() => props.navigation.navigate("Confirm", { order })}/>
+                       onPress={() => props.navigation.navigate("Xác nhận", { order })}/>
                </View>
            </Content>
        </Container>

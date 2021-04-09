@@ -31,7 +31,7 @@ const Checkout = (props) => {
             shippingAddress2: address2,
         }
 
-        props.navigation.navigate("Payment", {order: order })
+        props.navigation.navigate("Thanh toán", {order: order })
     }
 
     return (
