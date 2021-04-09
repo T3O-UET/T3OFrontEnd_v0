@@ -1,16 +1,12 @@
 import React, { useEffect, useState, useContext} from 'react'
-import { Text, View, Button } from 'react-native'
-import { Item, Picker, Toast } from 'native-base'
-import Icon from 'react-native-vector-icons/FontAwesome'
+import { View, Button } from 'react-native'
 import FormContainer from '../../Form/FormContainer'
 import Input from '../../Form/Input'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 import { connect } from 'react-redux'
 
-
-const Checkout = () => {
-
+const Checkout = (props) => {
     const [ orderItems, setOrderItems ] = useState();
     const [ address, setAddress ] = useState();
     const [ address2, setAddress2 ] = useState();
@@ -25,7 +21,7 @@ const Checkout = () => {
         }
     }, [])
 
-    const checkOut = ()=> {
+    const checkOut = () => {
         let order = {
             city,
             dateOrdered: Date.now(),
@@ -35,46 +31,43 @@ const Checkout = () => {
             shippingAddress2: address2,
         }
 
-        props.navigation.navigate("Payment", {order: order})
+        props.navigation.navigate("Payment", {order: order })
     }
 
     return (
         <KeyboardAwareScrollView
             viewIsInsideTabBar={true}
-            extraHight={200}
+            extraHeight={200}
             enableOnAndroid={true}
         >
             <FormContainer title={"Shipping Address"}>
                 <Input
-                    placeholder={"phone"}
+                    placeholder={"Phone"}
                     name={"phone"}
                     value={phone}
                     keyboardType={"numeric"}
                     onChangeText={(text) => setPhone(text)}
                 />
-                <Input
+                   <Input
                     placeholder={"Shipping Address 1"}
                     name={"ShippingAddress1"}
                     value={address}
                     onChangeText={(text) => setAddress(text)}
                 />
-                <Input
+                   <Input
                     placeholder={"Shipping Address 2"}
                     name={"ShippingAddress2"}
                     value={address2}
                     onChangeText={(text) => setAddress2(text)}
                 />
-                <Input
+                   <Input
                     placeholder={"City"}
                     name={"city"}
                     value={city}
-                    keyboardType={"numeric"}
                     onChangeText={(text) => setCity(text)}
                 />
-                <View style={{ width: '80%', alignItems: "center"}}>
-                    <Button title="Confirm" 
-                    onPress={() => checkOut()}
-                    />
+                <View style={{ width: '80%', alignItems: "center" }}>
+                    <Button title="Confirm" onPress={() => checkOut()}/>
                 </View>
             </FormContainer>
         </KeyboardAwareScrollView>

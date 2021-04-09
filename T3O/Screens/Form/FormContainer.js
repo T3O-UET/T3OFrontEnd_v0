@@ -1,5 +1,5 @@
 import React from 'react'
-import {ScrollView, Dimensions, StyleSheet, Tetx } from 'react-native'
+import {ScrollView, Dimensions, StyleSheet, Text } from 'react-native'
 
 var {width} = Dimensions.get('window');
 const FormContainer = (props) => {
