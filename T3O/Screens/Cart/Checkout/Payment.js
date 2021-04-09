@@ -29,17 +29,15 @@ const Payment = (props) => {
     const [card, setCard] = useState();
     return(
        <Container>
-           <Header>
-               <Body>
-                   <Title>Chọn hình thức thanh toán</Title>
-               </Body>
+           <Header style={{ height: 70}}>
+                   <Title style={{paddingTop: 15, fontSize: 25}}>Chọn hình thức thanh toán</Title>
            </Header>
            <Content>
                {methods.map((item, index) => {
                    return (
                        <ListItem key={item.name} onPress={() => setSelected(item.value)}>
                            <Left>
-                            <Text>{item.name}</Text>
+                            <Text style={{ fontWeight: 'bold', fontSize: 20}}>{item.name}</Text>
                            </Left>
                            <Right>
                                <Radio selected={selected == item.value}/>
@@ -48,24 +46,25 @@ const Payment = (props) => {
                    )
                })}
                {selected == 3 ? (
-                <Picker
-                    selectedValue={card}
-                    headerStyle={{ backgroundColor: 'orange' }}
-                    headerBackButtonTextStyle={{ color: '#fff' }}
-                    headerTitleStyle={{ color: '#fff' }}
-                    style={{ height: 50, width: 150 }}
-                    onValueChange={(x) => setCard(x)}
-                  >
-                    <View style={{ paddingLeft: 100}}>  
-                    <Picker.Item label="BIDV" value="bidv" />
-                    <Picker.Item label="Techcombank" value="techcombank" />      
-                    <Picker.Item label="Vietcombank" value="vietcombank" /> 
-                    </View>
-                   </Picker>
+                 <View style={{paddingLeft: 14}}>
+                    <Picker
+                        selectedValue={card}
+                        headerStyle={{ backgroundColor: 'orange' }}
+                        headerBackButtonTextStyle={{ color: '#fff' }}
+                        headerTitleStyle={{ color: '#fff' }}
+                        style={{ height: 50, width: 200, color: 'blue'}}
+                        onValueChange={(x) => setCard(x)}
+                    >
+                        <Picker.Item label="BIDV" value="bidv" />
+                        <Picker.Item label="Techcombank" value="techcombank" />      
+                        <Picker.Item label="Vietcombank" value="vietcombank"/> 
+                    </Picker>
+                 </View>  
+                
                ) : null }
                <View style={{ marginTop: 60, alignSelf: 'center' }}>
                        <Button 
-                       title={"Confirm"} 
+                       title={"Xác nhận"} 
                        onPress={() => props.navigation.navigate("Confirm", { order })}/>
                </View>
            </Content>
