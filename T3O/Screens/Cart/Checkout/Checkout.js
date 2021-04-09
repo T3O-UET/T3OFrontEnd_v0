@@ -40,34 +40,34 @@ const Checkout = (props) => {
             extraHeight={200}
             enableOnAndroid={true}
         >
-            <FormContainer title={"Shipping Address"}>
+            <FormContainer title={"Địa chỉ giao hàng"}>
                 <Input
-                    placeholder={"Phone"}
+                    placeholder={"Số điện thoại"}
                     name={"phone"}
                     value={phone}
                     keyboardType={"numeric"}
                     onChangeText={(text) => setPhone(text)}
                 />
                    <Input
-                    placeholder={"Shipping Address 1"}
+                    placeholder={"Địa chỉ giao hàng 1"}
                     name={"ShippingAddress1"}
                     value={address}
                     onChangeText={(text) => setAddress(text)}
                 />
                    <Input
-                    placeholder={"Shipping Address 2"}
+                    placeholder={"Địa chỉ giao hàng 2"}
                     name={"ShippingAddress2"}
                     value={address2}
                     onChangeText={(text) => setAddress2(text)}
                 />
                    <Input
-                    placeholder={"City"}
+                    placeholder={"Thành phố"}
                     name={"city"}
                     value={city}
                     onChangeText={(text) => setCity(text)}
                 />
-                <View style={{ width: '80%', alignItems: "center" }}>
-                    <Button title="Confirm" onPress={() => checkOut()}/>
+                <View style={{ width: '80%', alignItems: "center", marginTop:40 }}>
+                    <Button title="Xác nhận" onPress={() => checkOut()}/>
                 </View>
             </FormContainer>
         </KeyboardAwareScrollView>
