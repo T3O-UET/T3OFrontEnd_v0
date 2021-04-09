@@ -3,7 +3,8 @@ import { Image, View, StyleSheet, Text, ScrollView, Button } from 'react-native'
 import { Left, Right, Container, H1} from 'native-base';
 import { connect } from 'react-redux';
 import * as actions from '../../Redux/Actions/cartActions';
-import Toast from 'react-native-toast-message'
+import Toast from 'react-native-toast-message';
+import { Toolbar, ToolbarBackAction, ToolbarContent, ToolbarAction } from 'react-native-paper';
 
 const SingleProduct = (props) => {
 
@@ -16,7 +17,9 @@ const SingleProduct = (props) => {
             <ScrollView style={{ marginBottom: 80, padding: 5}}
             >
                 <View>
-                    <Text style={styles.tasbar}>Chi tiết sản phẩm</Text>
+                    <Text style={styles.tasbar}>
+                        Chi tiết sản phẩm
+                    </Text>
                     <Image 
                         source={{
                             uri: item.image ? item.image 
