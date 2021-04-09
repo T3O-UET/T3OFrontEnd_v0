@@ -37,7 +37,7 @@ const Cart = (props) => {
         <>
         {props.cartItems.length ? (
             <Container>
-                <H1  style={styles.taskbar}>Your Cart</H1>
+                <H1  style={styles.taskbar}>Giỏ hàng của bạn</H1>
                 {/* <ScrollView> */}
                 {/* {props.cartItems.map(data => {
                     return (
@@ -75,19 +75,19 @@ const Cart = (props) => {
                         <Text style={styles.price}>${total}</Text>
                     </Left>
                     <Right>
-                        <Button title="Clear" 
+                        <Button title="Xóa" 
                             onPress={() => props.clearCart()}
                         />
                     </Right>
-                    <Right>
-                        <Button title="Checkout" onPress={() => props.navigation.navigate("Checkout")} />
+                    <Right  style={{ paddingRight: 20}}>
+                        <Button title="Kiểm tra" onPress={() => props.navigation.navigate("Checkout")} />
                     </Right>
                 </View>
             </Container>
         ): (
             <Container style={styles.emptyContainer}>
-                <Text>Looks like your cart is empty</Text>
-                <Text>Add products to your cart to get  started</Text>
+                <Text>Có vẻ như bạn chưa có sản phẩm nào trong giỏ hàng.</Text>
+                <Text>Hãy thêm sản phẩm bạn thích vào giỏ hàng nhé!</Text>
             </Container>
         )}
         </>

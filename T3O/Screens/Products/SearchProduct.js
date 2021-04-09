@@ -32,7 +32,7 @@ const SearchProduct = (props) => {
     ) : (
         <View style={styles.center}>
             <Text style={{ alignSelf: 'center'}}>
-                No products match selected criteria
+                Không tìm thấy sản phẩm nào!
             </Text>
         </View>
     )}

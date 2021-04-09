@@ -20,7 +20,7 @@ function MyStack() {
                 name="Checkout"
                 component={CheckoutNavigator}
                 options={{
-                    title: 'Checkout'
+                    title: 'Thông tin'
                 }}
             />
         </Stack.Navigator>
