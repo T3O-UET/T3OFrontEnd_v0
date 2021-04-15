@@ -101,16 +101,16 @@ const ProductContainer = (props) => {
   // Categories
   const changeCtg = (ctg) => {
     {
-      ctg === 'all' 
+      ctg === "all"
         ? [setProductsCtg(initialState), setActive(true)]
         : [
             setProductsCtg(
-              products.filter((i) => i.category.$oid === ctg),
+              products.filter((i) => i.category._id === ctg),
               setActive(true)
-            )
-        ]
+            ),
+          ];
     }
-  }
+  };
 
   return (
     <ScrollView>
@@ -174,13 +174,13 @@ const ProductContainer = (props) => {
               <Banner />
             </View>
             <View>
-              <CategoryFilter 
-                categories={categories}
-                CategoryFilter={changeCtg}
-                productsCtg={productsCtg}
-                active={active}
-                setActive={setActive}
-              />
+            <CategoryFilter
+              categories={categories}
+              categoryFilter={changeCtg}
+              productsCtg={productsCtg}
+              active={active}
+              setActive={setActive}
+            />
             </View>
             {productsCtg.length > 0 ? (
             <View style={styles.listContainer}>

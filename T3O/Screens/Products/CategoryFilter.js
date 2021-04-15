@@ -15,7 +15,7 @@ const CategoryFilter = (props) => {
                     style={{marginRight: 10}}
                     key={-1}
                     onPress={() => {
-                        props.CategoryFilter('all'), props.setActive(-1)
+                        props.categoryFilter('all'), props.setActive(-1)
                     }}
                 >
                     <Badge
@@ -27,13 +27,13 @@ const CategoryFilter = (props) => {
                     </Badge>
                 </TouchableOpacity>
                 {props.categories.map((item) => (
-                    <TouchableOpacity
-                    style={{marginRight: 10}}
-                    key={item._id}
-                    onPress={() => {
-                        props.CategoryFilter(item._id.$oid), 
-                        props.setActive(props.categories.indexOf(item))
-                    }}
+                      <TouchableOpacity
+                      style={{marginRight: 10}}
+                      key={item._id}
+                      onPress={() => {
+                          props.categoryFilter(item._id), 
+                          props.setActive(props.categories.indexOf(item))
+                      }}
                 >
                     <Badge
                         style={(styles.center,
