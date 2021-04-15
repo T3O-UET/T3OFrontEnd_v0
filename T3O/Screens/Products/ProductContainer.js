@@ -113,100 +113,111 @@ const ProductContainer = (props) => {
   };
 
   return (
-    <ScrollView>
-    <View>
-      {/* <SafeAreaView style={styles.header_safe_area}>
-        <View style={styles.header}>
-          <View style={styles.header_inner}>
-            <Image
-                style={styles.image}
-                source={require("../../assets/logo.png")}
-                resizeMode="contain"
-            />
-            <Text style={styles.title}>
-                T3O Store
-            </Text>
+    <>
+    {loading == false ? (
+      <Container>
+      <ScrollView>
+      <View>
+        {/* <SafeAreaView style={styles.header_safe_area}>
+          <View style={styles.header}>
+            <View style={styles.header_inner}>
+              <Image
+                  style={styles.image}
+                  source={require("../../assets/logo.png")}
+                  resizeMode="contain"
+              />
+              <Text style={styles.title}>
+                  T3O Store
+              </Text>
+            </View>
+            <TouchableHighlight
+              activeOpacity={1}
+              underlayColor={"#ccd0d5"}
+              onPress={this._onFocus}
+              style={styles.search_icon_box}
+            >
+              <Icon name="search" size={22} color="#000000"  />
+            </TouchableHighlight>
+            <AnimatedView
+              style={[ styles.input_box, {transform: [{translateX: this._input_box_translate_x}] }]}
+            ></AnimatedView>
           </View>
-          <TouchableHighlight
-            activeOpacity={1}
-            underlayColor={"#ccd0d5"}
-            onPress={this._onFocus}
-            style={styles.search_icon_box}
-          >
-            <Icon name="search" size={22} color="#000000"  />
-          </TouchableHighlight>
-          <AnimatedView
-            style={[ styles.input_box, {transform: [{translateX: this._input_box_translate_x}] }]}
-          ></AnimatedView>
-        </View>
-      </SafeAreaView> */}
-      {/* older code */}
-      {/* <Header searchBar rounded>
-        <Item>
-          <Icon name="ios-search"/> */}
-          <SearchBar
-            showLoading={false}
-            platform={Platform.OS}
-            // clearIcon={true}
-            // value={search}
-            inputStyle={{backgroundColor: '#EEEEEE', marginLeft: 12}}
-            containerStyle={{backgroundColor: 'white'}}
-            // placeholderTextColor={'#g5g5g5'}
-            style={styles.searchBar}
-            searchIcon={{ size: 30 }}
-            placeholder="Search"
-            onFocus={openList}
-            onChangeText={(text) => searchProduct(text)}
-          />
-          {focus == true ? (
-            <Icon onPress={onBlur} name="ios-close" />
-          ) : null}
-        {/* </Item>
-      </Header> */}
-      {focus == true ? (
-        <SearchProduct
-          navigation={props.navigation}
-          productsFiltered={productsFiltered} 
-          />
-      ) : (
-          <View >
-            <View>
-              <Banner />
-            </View>
-            <View>
-            <CategoryFilter
-              categories={categories}
-              categoryFilter={changeCtg}
-              productsCtg={productsCtg}
-              active={active}
-              setActive={setActive}
+        </SafeAreaView> */}
+        {/* older code */}
+        {/* <Header searchBar rounded>
+          <Item>
+            <Icon name="ios-search"/> */}
+            <SearchBar
+              showLoading={false}
+              platform={Platform.OS}
+              // clearIcon={true}
+              // value={search}
+              inputStyle={{backgroundColor: '#EEEEEE', marginLeft: 12}}
+              containerStyle={{backgroundColor: 'white'}}
+              // placeholderTextColor={'#g5g5g5'}
+              style={styles.searchBar}
+              searchIcon={{ size: 30 }}
+              placeholder="Search"
+              onFocus={openList}
+              onChangeText={(text) => searchProduct(text)}
             />
-            </View>
-            {productsCtg.length > 0 ? (
-            <View style={styles.listContainer}>
-                {productsCtg.map((item) => {
-                    return(
-                        <ProductList
-                            navigation={props.navigation}
-                            key={item.name}
-                            item={item}
-                        />
-                    )
-                })}
+            {focus == true ? (
+              <Icon onPress={onBlur} name="ios-close" />
+            ) : null}
+          {/* </Item>
+        </Header> */}
+        {focus == true ? (
+          <SearchProduct
+            navigation={props.navigation}
+            productsFiltered={productsFiltered} 
+            />
+        ) : (
+            <View >
+              <View>
+                <Banner />
               </View>
-            ) : (
-              <View style={styles.center, { height: '40%'}}>
-                <Text>No product found</Text>
+              <View>
+              <CategoryFilter
+                categories={categories}
+                categoryFilter={changeCtg}
+                productsCtg={productsCtg}
+                active={active}
+                setActive={setActive}
+              />
               </View>
-            )}
-            <View style={styles.listContainer}>
+              {productsCtg.length > 0 ? (
+              <View style={styles.listContainer}>
+                  {productsCtg.map((item) => {
+                      return(
+                          <ProductList
+                              navigation={props.navigation}
+                              key={item.name}
+                              item={item}
+                          />
+                      )
+                  })}
+                </View>
+              ) : (
+                <View style={styles.center, { height: '40%'}}>
+                  <Text>No product found</Text>
+                </View>
+              )}
+              <View style={styles.listContainer}>
+              </View>
             </View>
-          </View>
-      )}
-    </View>
-    </ScrollView>
-  )
-}
+        )}
+      </View>
+      </ScrollView>
+      </Container>
+   ):(
+     //Loading
+      <Container style={[styles.center, { backgroundColor: "#f2f2f2"}]}>
+        <ActivityIndicator size="large" color="red" />
+      </Container> 
+  )}
+  </>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
