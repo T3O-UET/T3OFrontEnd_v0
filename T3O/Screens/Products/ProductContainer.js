@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,  useCallback } from 'react';
 import { 
+        Alert,
         ScrollView, 
         View, 
         StyleSheet, 
@@ -13,11 +14,14 @@ import {
 import { Container, Header, Icon, Item, Input, Text, Image, AnimatedView} from 'native-base';
 import { SearchBar } from 'react-native-elements';
 
+import baseURL from "../../assets/common/baseUrl";
+import axios from 'axios';
 
 import ProductList from './ProductList';
 import SearchProduct from './SearchProduct';
 import Banner from '../../Shared/Banner';
 import CategoryFilter from './CategoryFilter';
+import { useFocusEffect } from '@react-navigation/native'
 
 var { height } = Dimensions.get("window")
 const data = require('../../assets/data/products.json');
@@ -27,37 +31,62 @@ const productCategories = require('../../assets/data/categories.json');
 const ProductContainer = (props) => {
 
   const [products, setProducts ] = useState([]);
-  const [productsFiltered, setproductsFiltered] = useState([]);
+  const [productsFiltered, setProductsFiltered] = useState([]);
   const [focus, setFocus] = useState();
   const [categories, setCategories] = useState([]);
   const [active, setActive] = useState();
   const [initialState, setInitialState] = useState([]);
   const [productsCtg, setProductsCtg] = useState([]);
+  const [loading, setLoading] = useState(true)
 
-  useEffect(() => {
-    setProducts(data);
-    setproductsFiltered(data);
-    setFocus(false);
-    setCategories(productCategories);
-    setProductsCtg(data);
-    setActive(-1);
-    setInitialState(data);
-
-
-    return () => {
-      setProducts([])
-      setproductsFiltered([])
-      setFocus()
-      setCategories([])
-      setActive()
-      setInitialState()
-    }
-  }, [])
+  useFocusEffect((
+      useCallback(
+        () => {
+          setFocus(false);
+          setActive(-1);
+          
+          // Products
+          axios
+            .get(`${baseURL}/products/`)
+            .then((respone) => {
+              setProducts(respone.data);
+              setProductsFiltered(respone.data);
+              setProductsCtg(respone.data);
+              setInitialState(respone.data);
+              setLoading(false)
+            })
+            .catch((error) => {
+              console.log('Api call error')
+            })
+      
+          // Categories
+          axios
+            .get(`${baseURL}/categories/`)
+            .then((res) => {
+              setCategories(res.data)
+            })
+            .catch((error) => {
+              console.log('Api call error')
+            })
+      
+          return () => {
+            setProducts([]);
+            setProductsFiltered([]);
+            setFocus();
+            setCategories([]);
+            setActive();
+            setInitialState();
+          };
+        },
+        [],
+      )
+    ))
+  
   const searchProduct = (text) => {
-    setproductsFiltered(
-      products.filter((i) => i.name.toLowerCase().includes(text.toLowerCase()))
-    )
-  }
+      setProductsFiltered(
+        products.filter((i) => i.name.toLowerCase().includes(text.toLowerCase()))
+      );
+    };
 
   const openList = () => {
     setFocus(true);
@@ -116,7 +145,6 @@ const ProductContainer = (props) => {
         <Item>
           <Icon name="ios-search"/> */}
           <SearchBar
-            
             showLoading={false}
             platform={Platform.OS}
             // clearIcon={true}
@@ -155,15 +183,15 @@ const ProductContainer = (props) => {
               />
             </View>
             {productsCtg.length > 0 ? (
-              <View style={styles.listContainer}>
+            <View style={styles.listContainer}>
                 {productsCtg.map((item) => {
-                  return(
-                    <ProductList
-                      navigation={props.navigation}
-                      key={item._id.$oid}
-                      item={item}
-                    />
-                  )
+                    return(
+                        <ProductList
+                            navigation={props.navigation}
+                            key={item.name}
+                            item={item}
+                        />
+                    )
                 })}
               </View>
             ) : (
@@ -172,14 +200,6 @@ const ProductContainer = (props) => {
               </View>
             )}
             <View style={styles.listContainer}>
-              {/* <FlatList
-                data={products}
-                numColumns={2}
-                renderItem={({item}) => <ProductList
-                key={item.brand}
-                item={item}/>}
-                keyExtractor={item => item.brand}
-              /> */}
             </View>
           </View>
       )}
