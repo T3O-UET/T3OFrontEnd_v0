@@ -17,7 +17,7 @@ const Login = (props) => {
 
     useEffect(() => {
         if (context.stateUser.isAuthenticated === true) {
-          props.navigation.navigate("User Profile");
+          props.navigation.navigate("User Menu");
         }
       }, [context.stateUser.isAuthenticated]);
 
