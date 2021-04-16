@@ -1,15 +1,25 @@
-import React , {useState}from 'react';
+import React , {useState, useContext, useEffect} from 'react';
 import { View, Text, StyleSheet, Button} from 'react-native';
 import FormContainer from '../Form/FormContainer';
 import Input from '../Form/Input';
 import MyButton from "../../Shared/MyButton";
 import Error from '../../Shared/Error';
 
-const Login = (props) => {
+//Context
+import AuthGlobal from "../../Context/store/AuthGlobal";
+import { loginUser } from "../../Context/actions/Auth.actions";
 
+const Login = (props) => {
+    const context = useContext(AuthGlobal);
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] =useState("")
+
+    useEffect(() => {
+        if (context.stateUser.isAuthenticated === true) {
+          props.navigation.navigate("User Profile");
+        }
+      }, [context.stateUser.isAuthenticated]);
 
     const handleSubmit = () => {
         const user = {
@@ -19,7 +29,8 @@ const Login = (props) => {
         if (email === "" || password === ""){
             setError("Email và Password là bắt buộc")
         } else {
-            console.log('success')
+            // console.log('success')
+            loginUser(user, context.dispatch);
         }
     }
 
@@ -30,7 +41,7 @@ const Login = (props) => {
             name={"email"}
             id={"email"}
             value={email}
-            onChangeText={(text) => setEmail(text)}
+            onChangeText={(text) => setEmail(text.toLowerCase())}
             />
             <Input
             placeholder={"Nhập Password"}
