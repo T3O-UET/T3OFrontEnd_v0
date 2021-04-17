@@ -32,7 +32,6 @@ const UserProfile = (props) => {
                 axios.get(`${baseURL}/users/${context.stateUser.user.userId}`, { headers: { Authorization: AuthStr } })
                     .then((user) => setUserProfile(user.data))
                     .then(res => {
-
                         // If request is good...
                         console.log("Good request "+res.data);
                     })
@@ -62,15 +61,21 @@ const UserProfile = (props) => {
                     paddingBottom: 30
                     }}> Thông tin khách hàng </Text> 
                 </View>
-                <Text style={{ fontSize: 20 }}>
+                <Text style={styles.text}>
                     Họ và tên:        {userProfile ? userProfile.name : "" }
                 </Text>        
-               <Text style={{ fontSize: 20 }}>
+               <Text style={styles.text}>
                     Email:               {userProfile ? userProfile.email : "" }
                </Text>
-               <Text style={{ fontSize: 20 }}>
+               <Text style={styles.text}>
                     Số điện thoại: {userProfile ? userProfile.phone : "" }
                </Text>
+               <Text style={styles.text}>
+                    Địa chỉ:             {userProfile ? userProfile.address : "" }
+                </Text> 
+                <Text style={styles.text}>
+                    Thành phố:      {userProfile ? userProfile.city : "" }
+                </Text> 
                <View style={{ marginTop: 40, alignItems: 'center' }}>
                         <MyButton style={{                            
                             backgroundColor:'#36CBDA', 
@@ -89,8 +94,17 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     subContainer: {
-        paddingLeft: 30,
+        paddingLeft: 10,
         marginTop: 30
+    },
+    text: {
+        fontSize: 20, 
+        backgroundColor: '#D6D5D5', 
+        borderRadius: 20, 
+        paddingLeft: 10, 
+        padding: 5, 
+        paddingBottom: 5 ,
+        marginBottom: 5,
     }
 })
 
