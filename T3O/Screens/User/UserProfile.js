@@ -37,7 +37,7 @@ const UserProfile = (props) => {
                         // If request is good...
                         console.log("Good request "+res.data);
                     })
-                    .then(console.log("URL: "+`${baseURL}/users/:${context.stateUser.user.userId}`))
+                    .then(console.log("URL: "+`${baseURL}/users/${context.stateUser.user.userId}`))
                     .then(console.log("Token after login function called "+res))
                     .catch((error) => {
                         console.log('error ' + error);

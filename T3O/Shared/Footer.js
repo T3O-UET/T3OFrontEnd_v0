@@ -40,26 +40,25 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         alignContent: "center",
         justifyContent: "center",
-        
-        // backgroundColor: '#312F2F'
+        backgroundColor: '#36CBDA'
     },
     slogan: { 
         textAlign: 'center',
         fontSize: 20, 
         fontWeight: 'bold', 
         paddingTop: 20,
-        color: 'black'
+        color: 'white'
     },
     contact: {
         paddingLeft: 70,
         fontSize: 14,
-        color: 'black'
+        color: 'white'
     },
     address: {  
         textAlign: 'center',
         fontSize: 14,
         paddingBottom: 20,
-        color: 'black'
+        color: 'white'
     },
     title: {
         textAlign: 'center',
