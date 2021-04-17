@@ -17,11 +17,15 @@ import { SearchBar } from 'react-native-elements';
 import baseURL from "../../assets/common/baseUrl";
 import axios from 'axios';
 
+import Footer from '../../Shared/Footer'
 import ProductList from './ProductList';
 import SearchProduct from './SearchProduct';
 import Banner from '../../Shared/Banner';
 import CategoryFilter from './CategoryFilter';
 import { useFocusEffect } from '@react-navigation/native'
+import MarqueeText from 'react-native-marquee';
+// import HSNZ from "react-native-marquee-scroll";
+
 
 var { height } = Dimensions.get("window")
 const data = require('../../assets/data/products.json');
@@ -38,6 +42,8 @@ const ProductContainer = (props) => {
   const [initialState, setInitialState] = useState([]);
   const [productsCtg, setProductsCtg] = useState([]);
   const [loading, setLoading] = useState(true)
+
+   
 
   useFocusEffect((
       useCallback(
@@ -68,6 +74,8 @@ const ProductContainer = (props) => {
             .catch((error) => {
               console.log('Api call error')
             })
+
+            
       
           return () => {
             setProducts([]);
@@ -112,6 +120,7 @@ const ProductContainer = (props) => {
     }
   };
 
+ 
   return (
     <>
     {loading == false ? (
@@ -176,6 +185,7 @@ const ProductContainer = (props) => {
               <View>
                 <Banner />
               </View>
+              
               <View>
               <CategoryFilter
                 categories={categories}
@@ -184,6 +194,27 @@ const ProductContainer = (props) => {
                 active={active}
                 setActive={setActive}
               />
+              </View>
+              <View>
+              <MarqueeText
+                style={{ paddingTop: 5, paddingBottom: 5, fontSize: 22 }}
+                duration={100000}
+                marqueeOnStart
+                loop
+                marqueeDelay={2000}
+                marqueeResetDelay={1000}
+              >
+              Sản phẩm chính hãng T3O Store
+              </MarqueeText>   
+              {/* <HSNZ
+                loop={-1}
+                direction={"ltr"}
+                autoPlay={true}
+                speed={20}
+                onEnd={this.end}
+              >
+                
+              </HSNZ> */}
               </View>
               {productsCtg.length > 0 ? (
               <View style={styles.listContainer}>
@@ -206,6 +237,7 @@ const ProductContainer = (props) => {
               </View>
             </View>
         )}
+        <Footer />
       </View>
       </ScrollView>
       </Container>

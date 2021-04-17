@@ -9,6 +9,7 @@ import baseURL from "../../assets/common/baseUrl"
 
 import AuthGlobal from "../../Context/store/AuthGlobal"
 import { logoutUser } from "../../Context/actions/Auth.actions"
+import { getUserProfile } from "../../Context/actions/Auth.actions"
 import { useEffect } from 'react/cjs/react.development';
 
 var { width } = Dimensions.get("window");
@@ -17,36 +18,33 @@ var { width } = Dimensions.get("window");
 const UserMenu = (props) => {
     const context = useContext(AuthGlobal)
     const [userProfile, setUserProfile] = useState()
-
-    useFocusEffect(
-        useCallback(() => {
+    
+    useEffect(() => {
         if (
             context.stateUser.isAuthenticated === false || 
             context.stateUser.isAuthenticated === null
         ) {
             props.navigation.navigate("Login")
         }
+
+        console.log(context.stateUser.user.userId);
+
         AsyncStorage.getItem("jwt")
-        .then((res) => {
-                axios
-                    .get(`${baseURL}/users/${context.stateUser.user.sub}`, {
-                        headers: { Authorization: `Bearer ${res}` },
-                    })
-                    .then((user) => setUserProfile(user.data))
-        })
-        .catch((error) => console.log(error))
+        .then(setUserProfile(getUserProfile(context.stateUser.user.userId)))
+        
+
         return () => {
             setUserProfile();
         }
 
-    }, [context.stateUser.isAuthenticated]))
+    }, [context.stateUser.isAuthenticated])
 
     return (
        <View style={{alignItems: 'center', textAlign: 'center'}}>
            <Text style={styles.helloUser}> Kính chào quý khách! </Text>
-           <Text style={{ fontSize: 30 }}>
-                   {userProfile ? userProfile.name : "" }
-               </Text>
+                <Text style={{ color: 'red', fontSize: 30 }}>
+                {userProfile ? userProfile.name : "" }
+                </Text>
            <MyButton style={styles.editButton} large onPress={() => {
                         props.navigation.navigate("User Profile")   
                     }}>

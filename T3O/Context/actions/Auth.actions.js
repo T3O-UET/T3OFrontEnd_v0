@@ -2,6 +2,16 @@ import jwt_decode from "jwt-decode"
 import AsyncStorage from "@react-native-community/async-storage"
 import Toast from "react-native-toast-message"
 import baseURL from "../../assets/common/baseUrl"
+// const user = [{
+//     id: "",
+//     isAdmin: "",
+//     address: "",
+//     city: "",
+//     name: "",
+//     email: "",
+//     password:"",
+//     phone:"",
+// }]
 
 export const SET_CURRENT_USER = "SET_CURRENT_USER";
 
@@ -18,6 +28,7 @@ export const loginUser = (user, dispatch) => {
     .then((data) => {
         if (data) {
             const token = data.token;
+            console.log("Token in login Function "+token);
             AsyncStorage.setItem("jwt", token)
             const decoded = jwt_decode(token)
             dispatch(setCurrentUser(decoded, user))
