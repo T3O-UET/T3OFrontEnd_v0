@@ -27,10 +27,22 @@ const UserMenu = (props) => {
             props.navigation.navigate("Login")
         }
 
-        console.log(context.stateUser.user.userId);
-
         AsyncStorage.getItem("jwt")
-        .then(setUserProfile(getUserProfile(context.stateUser.user.userId)))
+            .then((res) => {
+                const AuthStr = 'Bearer '.concat(res); 
+                axios.get(`${baseURL}/users/${context.stateUser.user.userId}`, { headers: { Authorization: AuthStr } })
+                    .then((user) => setUserProfile(user.data))
+                    .then(res => {
+
+                        // If request is good...
+                        console.log("Good request "+res.data);
+                    })
+                    .catch((error) => {
+                        console.log('error ' + error);
+                    });
+            })
+            .catch((error) => console.log(error))
+
         
 
         return () => {
@@ -41,10 +53,9 @@ const UserMenu = (props) => {
 
     return (
        <View style={{alignItems: 'center', textAlign: 'center'}}>
-           <Text style={styles.helloUser}> Kính chào quý khách! </Text>
-                <Text style={{ color: 'red', fontSize: 30 }}>
-                {userProfile ? userProfile.name : "" }
-                </Text>
+            <Text style={styles.helloUser}> 
+                Xin chào {userProfile ? userProfile.name : "" }! 
+            </Text>              
            <MyButton style={styles.editButton} large onPress={() => {
                         props.navigation.navigate("User Profile")   
                     }}>
@@ -57,7 +68,7 @@ const UserMenu = (props) => {
             </MyButton>
             <View style={{ marginTop: 80, width: 100, alignItems: 'center', alignSelf: 'center' }}>
                     <Button 
-                        style={{ borderRadius: 10, textAlign: 'center'}}
+                        style={{ borderRadius: 20, textAlign: 'center'}}
                         title={"Đăng xuất"} onPress={() => [
                         AsyncStorage.removeItem("jwt"),
                         logoutUser(context.dispatch)

@@ -1,16 +1,16 @@
 import React, { useContext, useState, useCallback } from 'react';
-import { View, Text, ScrollView, Button, StyleSheet } from 'react-native';
+import { View, Text, ScrollView, Button, StyleSheet, Dimensions } from 'react-native';
 import { Container } from "native-base"
 import { useFocusEffect } from "@react-navigation/native"
 import AsyncStorage from "@react-native-community/async-storage"
-// import OrderCard from "../../Shared/OrderCard"
-
+import MyButton from "../../Shared/MyButton";
 import axios from "axios"
 import baseURL from "../../assets/common/baseUrl"
 
 import AuthGlobal from "../../Context/store/AuthGlobal"
-import { logoutUser } from "../../Context/actions/Auth.actions"
 import { useEffect } from 'react/cjs/react.development';
+
+var width = Dimensions.get("window")
 
 const UserProfile = (props) => {
     const context = useContext(AuthGlobal)
@@ -53,25 +53,32 @@ const UserProfile = (props) => {
 
     return (
        <Container style={styles.container}>
-           <ScrollView contentContainerStyle={styles.subContainer}>
-               <Text style={{ fontSize: 30 }}>
-                   {userProfile ? userProfile.name : "" }
+           <ScrollView contentContainerStyle={styles.subContainer}> 
+                <View style={{alignItems: 'center',}}>
+                    <Text style={{ 
+                    fontSize: 22, 
+                    fontWeight: "bold", 
+                    paddingTop: 20,
+                    paddingBottom: 30
+                    }}> Thông tin khách hàng </Text> 
+                </View>
+                <Text style={{ fontSize: 20 }}>
+                    Họ và tên:        {userProfile ? userProfile.name : "" }
+                </Text>        
+               <Text style={{ fontSize: 20 }}>
+                    Email:               {userProfile ? userProfile.email : "" }
                </Text>
-               <View style={{ marginTop: 20 }}>
-                    <Text style={{ margin: 10 }}>
-                        Email: {userProfile ? userProfile.email : ""}
-                    </Text>
-                    <Text style={{ margin: 10 }}>
-                        Phone: {userProfile ? userProfile.phone : ""}
-                    </Text>
-               </View>
-               <View style={{ marginTop: 80 }}>
-                    <Button title={"Sign Out"} onPress={() => [
-                        AsyncStorage.removeItem("jwt"),
-                        logoutUser(context.dispatch)
-                    ]}/>
-               </View>
-        
+               <Text style={{ fontSize: 20 }}>
+                    Số điện thoại: {userProfile ? userProfile.phone : "" }
+               </Text>
+               <View style={{ marginTop: 40, alignItems: 'center' }}>
+                        <MyButton style={{                            
+                            backgroundColor:'#36CBDA', 
+                            borderRadius: 20, 
+                            }} large primary onPress={() => handleSubmit()}>
+                        <Text style={{ color: "white" }}>Sửa thông tin</Text>
+                        </MyButton>
+               </View>  
            </ScrollView>
        </Container>
     )
@@ -80,12 +87,11 @@ const UserProfile = (props) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: "center"
     },
     subContainer: {
-        alignItems: "center",
-        marginTop: 60
-    },
+        paddingLeft: 30,
+        marginTop: 30
+    }
 })
 
 export default UserProfile;

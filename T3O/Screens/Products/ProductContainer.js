@@ -197,8 +197,8 @@ const ProductContainer = (props) => {
               </View>
               <View>
               <MarqueeText
-                style={{ paddingTop: 5, paddingBottom: 5, fontSize: 22 }}
-                duration={100000}
+                style={{ paddingTop: 5, paddingBottom: 5, fontSize: 18 }}
+                duration={10000}
                 marqueeOnStart
                 loop
                 marqueeDelay={2000}
