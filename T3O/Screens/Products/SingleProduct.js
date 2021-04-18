@@ -53,12 +53,12 @@ const SingleProduct = (props) => {
                 </View>
                 <View style={styles.availabilityContainer}>
                     <View style={styles.availability}>
-                        <Text style={{ marginRight: 10 }}>
-                            Availability: {availabilityText}
+                        <Text style={{ marginRight: 5, fontSize: 16 }}>
+                            Tình trạng: {availabilityText}
                         </Text>
                         {availability}
                     </View>
-                    <Text>{item.description}</Text>
+                    <Text style={{ marginRight: 5, fontSize: 16 }}>Nhãn hiệu: {item.description}</Text>
                 </View>
             </ScrollView>
             <View style={styles.bottomContainer}>
@@ -116,12 +116,11 @@ const styles = StyleSheet.create({
     },
     contentHeader: {
         fontWeight: "bold",
-        marginBottom: 20
+        marginBottom: 10
     },
     contentText: {
         fontSize: 18,
-        fontWeight: "bold",
-        marginBottom: 20
+        marginBottom: 10
     },
     bottomContainer: {
         flexDirection: 'row',

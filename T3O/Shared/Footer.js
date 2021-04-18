@@ -4,8 +4,9 @@ import {StyleSheet, Image, SafeAreaView, Text, View, H1, Dimensions} from 'react
 var width = Dimensions.get('window')
 const Footer = () => {
     return (
+        <View style={{alignItems: 'center'}}>
         <SafeAreaView style={styles.footer}>
-            <View>
+            <View >
                 <View>
                 <Text style={ styles.slogan}>
                     T3O Store - Uy Tín là số 1
@@ -24,13 +25,14 @@ const Footer = () => {
                 Địa chỉ: số 20, phường Mai Dịch, quận Cầu Giấy, Hà nội.
                 </Text> 
                 </View>
-                <View>
-                <Text style={styles.title}>
-                    Edit by t3o team https://github.com/T3O-UET
-                </Text>
-                </View>
             </View>
         </SafeAreaView>
+        <View>
+            <Text style={styles.title}>
+                edit by t3o team https://github.com/T3O-UET
+            </Text>
+        </View>
+        </View>
     )
 }
 const styles = StyleSheet.create({
@@ -40,7 +42,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         alignContent: "center",
         justifyContent: "center",
-        backgroundColor: '#36CBDA'
+        backgroundColor: '#03bafc'
     },
     slogan: { 
         textAlign: 'center',
@@ -61,14 +63,14 @@ const styles = StyleSheet.create({
         color: 'white'
     },
     title: {
+        alignContent: 'center',
         textAlign: 'center',
         paddingBottom:5,
         width: 360,
-        fontStyle: 'italic',
+        fontWeight: 'bold',
         paddingTop: 5,
         fontSize: 8,
-        color: 'white',
-        backgroundColor: 'black'
+        color: 'black',
     }
 })
 

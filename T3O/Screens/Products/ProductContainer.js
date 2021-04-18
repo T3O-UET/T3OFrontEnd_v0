@@ -103,22 +103,21 @@ const ProductContainer = (props) => {
   const onBlur = () => {
     setFocus(false);
   }
-  // const _onFocus = () => {
   
-  // }
-  // Categories
-  const changeCtg = (ctg) => {
-    {
-      ctg === "all"
-        ? [setProductsCtg(initialState), setActive(true)]
-        : [
-            setProductsCtg(
-              products.filter((i) => i.category._id === ctg),
-              setActive(true)
-            ),
-          ];
-    }
-  };
+    // Categories
+    const changeCtg = (ctg) => {
+      {
+        ctg === "all"
+          ? [setProductsCtg(initialState), setActive(true)]
+          : [
+              setProductsCtg(
+                products.filter((i) => i.category._id === ctg),
+                setActive(true)
+              ),
+            ];
+      }
+    };
+  
 
  
   return (
@@ -230,7 +229,7 @@ const ProductContainer = (props) => {
                 </View>
               ) : (
                 <View style={styles.center, { height: '40%'}}>
-                  <Text>No product found</Text>
+                  <Text>Không tìm thấy sản phẩm nào!</Text>
                 </View>
               )}
               <View style={styles.listContainer}>
