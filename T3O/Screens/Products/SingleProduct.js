@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import * as actions from '../../Redux/Actions/cartActions';
 import Toast from 'react-native-toast-message';
 import { Toolbar, ToolbarBackAction, ToolbarContent, ToolbarAction } from 'react-native-paper';
+import TrafficLight from '../../Shared/TrafficLight'
 
 const SingleProduct = (props) => {
 
@@ -12,6 +13,23 @@ const SingleProduct = (props) => {
     const [availability, setAvailability] = useState(null);
     const [availabilityText, setAvailabilityText] = useState("");
 
+    useEffect(() => {
+        if (props.route.params.item.countInStock == 0) {
+            setAvailability(<TrafficLight unavailable></TrafficLight>);
+            setAvailabilityText("Hết hàng")
+        } else if (props.route.params.item.countInStock <= 5) {
+            setAvailability(<TrafficLight limited></TrafficLight>);
+            setAvailabilityText("Số lượng giới hạn")
+        } else {
+            setAvailability(<TrafficLight available></TrafficLight>);
+            setAvailabilityText("Hàng có sãn")
+        }
+
+        return () => {
+            setAvailability(null);
+            setAvailabilityText("");
+        }
+    }, [])
     return (
         <Container style={styles.containter}>
             <ScrollView style={{ marginBottom: 80, padding: 5}}
@@ -32,6 +50,15 @@ const SingleProduct = (props) => {
                 <View style={styles.contentContainer}>
                         <H1 style={styles.contentHeader}>{item.name}</H1>
                         <Text style={styles.contentText}>{item.brand}</Text>
+                </View>
+                <View style={styles.availabilityContainer}>
+                    <View style={styles.availability}>
+                        <Text style={{ marginRight: 10 }}>
+                            Availability: {availabilityText}
+                        </Text>
+                        {availability}
+                    </View>
+                    <Text>{item.description}</Text>
                 </View>
             </ScrollView>
             <View style={styles.bottomContainer}>
@@ -107,6 +134,14 @@ const styles = StyleSheet.create({
         fontSize: 24,
         margin: 20,
         color: 'red'
+    },
+    availabilityContainer: {
+        marginBottom: 20,
+        alignItems: "center"
+    },
+    availability: {
+        flexDirection: 'row',
+        marginBottom: 10,
     }
 })
 
