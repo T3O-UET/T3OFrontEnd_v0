@@ -1,5 +1,5 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add react-native-marwquee
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add mime
 
 PATH: 
   C:\Python27\;C:\Python27\Scripts;Ruby30-x64\bin;C:\Python39\Scripts\;C:\Python39\;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\110\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\120\Tools\Binn\;C:\Program Files\Microsoft SQL Server\120\Tools\Binn\;C:\Program Files\Microsoft SQL Server\120\DTS\Binn\;C:\Program Files (x86)\Microsoft SQL Server\150\DTS\Binn\;C:\Program Files\Git\cmd;C:\Program Files\Java\jdk1.8.0_111\bin;C:\Python27;C:\Users\Admin\miniconda3;C:\Users\Admin\miniconda3\Library\mingw-w64\bin;C:\Users\Admin\miniconda3\Library\usr\bin;C:\Users\Admin\miniconda3\Library\bin;C:\Users\Admin\miniconda3\Scripts;C:\Users\Admin\AppData\Local\Microsoft\WindowsApps;C:\Users\Admin\AppData\Local\GitHubDesktop\bin;C:\adb;C:\ProgramData\chocolatey\bin;C:\Users\Admin\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Program Files\nodejs\;C:\Program Files\OpenJDK\openjdk-8u282-b08\bin;C:\Users\Admin\AppData\Local\Android\Sdk;C:\Program Files (x86)\Yarn\bin\;C:\Users\Admin\AppData\Local\Microsoft\WindowsApps;C:\Users\Admin\AppData\Local\GitHubDesktop\bin;C:\Users\Admin\AppData\Local\atom\bin;C:\Users\Admin\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Users\Admin\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Admin\AppData\Roaming\npm;C:\Users\Admin\AppData\Local\Yarn\bin
@@ -14,17 +14,7 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/react-native-marwquee: Not found
-      at Request.params.callback [as _callback] (C:\Program Files (x86)\Yarn\lib\cli.js:66097:18)
-      at Request.self.callback (C:\Program Files (x86)\Yarn\lib\cli.js:140749:22)
-      at Request.emit (node:events:378:20)
-      at Request.<anonymous> (C:\Program Files (x86)\Yarn\lib\cli.js:141721:10)
-      at Request.emit (node:events:378:20)
-      at IncomingMessage.<anonymous> (C:\Program Files (x86)\Yarn\lib\cli.js:141643:12)
-      at Object.onceWrapper (node:events:484:28)
-      at IncomingMessage.emit (node:events:390:22)
-      at endReadableNT (node:internal/streams/readable:1307:12)
-      at processTicksAndRejections (node:internal/process/task_queues:81:21)
+  Error: EPERM: operation not permitted, unlink 'E:\UET\UI\T3OFrontEnd\T3O\node_modules\@babel\generator\node_modules\.bin'
 
 npm manifest: 
   {
@@ -54,7 +44,10 @@ npm manifest:
       "react-native": "https://github.com/expo/react-native/archive/sdk-40.0.1.tar.gz",
       "react-native-elements": "^3.3.2",
       "react-native-gesture-handler": "^1.10.3",
+      "react-native-hsnz-marquee": "^1.0.4",
       "react-native-keyboard-aware-scroll-view": "^0.9.3",
+      "react-native-marquee": "^0.3.2",
+      "react-native-marquee-scroll": "^1.0.3",
       "react-native-pager-view": "^5.1.2",
       "react-native-paper": "^4.7.2",
       "react-native-reanimated": "^2.1.0",
@@ -5826,6 +5819,11 @@ Lockfile:
       invariant "^2.2.4"
       prop-types "^15.7.2"
   
+  react-native-hsnz-marquee@^1.0.4:
+    version "1.0.4"
+    resolved "https://registry.yarnpkg.com/react-native-hsnz-marquee/-/react-native-hsnz-marquee-1.0.4.tgz#9bafcff527c9a2fe19585e550bfb3023fbadc6fc"
+    integrity sha512-7vWvqJ+6mXkBTA/j6jeZ29X5fX/KSZXjNfqt7kbiJoyaiPTOQNeDi0tj7wTkSlq9NTx21Xqk93Tgxg0JFHGSEw==
+  
   react-native-iphone-x-helper@^1.0.3, react-native-iphone-x-helper@^1.3.0, react-native-iphone-x-helper@^1.3.1:
     version "1.3.1"
     resolved "https://registry.yarnpkg.com/react-native-iphone-x-helper/-/react-native-iphone-x-helper-1.3.1.tgz#20c603e9a0e765fd6f97396638bdeb0e5a60b010"
@@ -5838,6 +5836,16 @@ Lockfile:
     dependencies:
       prop-types "^15.6.2"
       react-native-iphone-x-helper "^1.0.3"
+  
+  react-native-marquee-scroll@^1.0.3:
+    version "1.0.3"
+    resolved "https://registry.yarnpkg.com/react-native-marquee-scroll/-/react-native-marquee-scroll-1.0.3.tgz#91075a453ea8889e9bdb6b871466b8edca021159"
+    integrity sha512-D2yRDhmRj+T7JgMsCogrf9Et16xAcmZ3s0azFtdpRJF+UfhSSJu0PRIZyVS2jjtQzwAo14dm2I6Rgs8qIBVtmA==
+  
+  react-native-marquee@^0.3.2:
+    version "0.3.2"
+    resolved "https://registry.yarnpkg.com/react-native-marquee/-/react-native-marquee-0.3.2.tgz#e86fcfe9ea2036637b079d4af0d19f92195aeef2"
+    integrity sha512-GfN97aOapOhrFc4La4N/SoXAjrgZwbB6Im9yJKhNLHx/SsY4Wqoh3OvYrLzznL2GASEDoO3zZXdufStg6NG8TA==
   
   react-native-pager-view@^5.1.2:
     version "5.1.2"
