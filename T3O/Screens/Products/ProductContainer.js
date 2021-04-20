@@ -28,8 +28,8 @@ import MarqueeText from 'react-native-marquee';
 
 
 var { height } = Dimensions.get("window")
-const data = require('../../assets/data/products.json');
-const productCategories = require('../../assets/data/categories.json');
+// const data = require('../../assets/data/products.json');
+// const productCategories = require('../../assets/data/categories.json');
 
 
 const ProductContainer = (props) => {
@@ -67,9 +67,10 @@ const ProductContainer = (props) => {
       
           // Categories
           axios
-            .get(`${baseURL}/categories/`)
+            .get(`${baseURL}/categories`)
             .then((res) => {
               setCategories(res.data)
+              console.log(res.data)
             })
             .catch((error) => {
               console.log('Api call error')
@@ -111,7 +112,10 @@ const ProductContainer = (props) => {
           ? [setProductsCtg(initialState), setActive(true)]
           : [
               setProductsCtg(
-                products.filter((i) => i.category._id === ctg),
+                products.filter((i) => {
+                  i.category._id === ctg,
+                  console.log(i.category._id)
+                }),
                 setActive(true)
               ),
             ];
@@ -124,37 +128,8 @@ const ProductContainer = (props) => {
     <>
     {loading == false ? (
       <Container>
-      <ScrollView>
-      <View>
-        {/* <SafeAreaView style={styles.header_safe_area}>
-          <View style={styles.header}>
-            <View style={styles.header_inner}>
-              <Image
-                  style={styles.image}
-                  source={require("../../assets/logo.png")}
-                  resizeMode="contain"
-              />
-              <Text style={styles.title}>
-                  T3O Store
-              </Text>
-            </View>
-            <TouchableHighlight
-              activeOpacity={1}
-              underlayColor={"#ccd0d5"}
-              onPress={this._onFocus}
-              style={styles.search_icon_box}
-            >
-              <Icon name="search" size={22} color="#000000"  />
-            </TouchableHighlight>
-            <AnimatedView
-              style={[ styles.input_box, {transform: [{translateX: this._input_box_translate_x}] }]}
-            ></AnimatedView>
-          </View>
-        </SafeAreaView> */}
-        {/* older code */}
-        {/* <Header searchBar rounded>
-          <Item>
-            <Icon name="ios-search"/> */}
+        <ScrollView>
+          <View>
             <SearchBar
               showLoading={false}
               platform={Platform.OS}
@@ -184,36 +159,19 @@ const ProductContainer = (props) => {
               <View>
                 <Banner />
               </View>
-              
               <View>
-              <CategoryFilter
-                categories={categories}
-                categoryFilter={changeCtg}
-                productsCtg={productsCtg}
-                active={active}
-                setActive={setActive}
-              />
+                <CategoryFilter
+                  categories={categories}
+                  categoryFilter={changeCtg}
+                  productsCtg={productsCtg}
+                  active={active}
+                  setActive={setActive}
+                />
               </View>
               <View>
-              <MarqueeText
-                style={{ paddingTop: 5, paddingBottom: 5, fontSize: 18 }}
-                duration={10000}
-                marqueeOnStart
-                loop
-                marqueeDelay={2000}
-                marqueeResetDelay={1000}
-              >
-              Sản phẩm chính hãng T3O Store
-              </MarqueeText>   
-              {/* <HSNZ
-                loop={-1}
-                direction={"ltr"}
-                autoPlay={true}
-                speed={20}
-                onEnd={this.end}
-              >
-                
-              </HSNZ> */}
+              <Text>
+                Sản phẩm chính hãng T3O Store
+              </Text>    
               </View>
               {productsCtg.length > 0 ? (
               <View style={styles.listContainer}>
@@ -270,37 +228,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignContent: 'center'
   }
-  // header_safe_area: {
-  //   zIndex: 1000
-  // },
-  // header: {
-  //   height: 50,
-  //   paddingHorizontal: 16
-  // },
-  // header_inner: {
-  //   flex: 1,
-  //   overflow: 'hidden',
-  //   flexDirection: 'row',
-  //   justifyContent: 'space-between',
-  //   alignItems: 'center',
-  //   position: 'relative'
-  // },
-  // image: {
-  //   height: 35,
-  //   width: 50,
-  // },
-  // title: {
-  //   fontWeight: "bold",
-  //   fontSize: 22,
-  // },
-  // search_icon_box: {
-  //   width: 40,
-  //   height: 40,
-  //   borderRadius: 40,
-  //   backgroundColor: '#e4e6eb',
-  //   flexDirection: 'row',
-  //   justifyContent: 'center',
-  //   alignItems: 'center'
-  // }
 })
 export default ProductContainer;
