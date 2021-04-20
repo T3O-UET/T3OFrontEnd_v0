@@ -55,6 +55,7 @@ const ProductContainer = (props) => {
               setProducts(res.data);
               setProductsFiltered(res.data);
               setProductsCtg(res.data);
+              console.log(res.data);
               setInitialState(res.data);
               setLoading(false)
             })
