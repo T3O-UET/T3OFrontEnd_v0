@@ -111,7 +111,11 @@ const ProductContainer = (props) => {
           ? [setProductsCtg(initialState), setActive(true)]
           : [
               setProductsCtg(
-                products.filter((i) => i.category._id === ctg),
+                products.filter((i) => {
+                  i.category._id === ctg,
+                  console.log( i.category._id)
+                }
+                ),
                 setActive(true)
               ),
             ];
