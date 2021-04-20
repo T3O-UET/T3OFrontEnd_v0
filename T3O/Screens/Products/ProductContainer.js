@@ -33,19 +33,16 @@ var { height } = Dimensions.get("window")
 
 
 const ProductContainer = (props) => {
-
-  const [products, setProducts ] = useState([]);
-  const [productsFiltered, setProductsFiltered] = useState([]);
-  const [focus, setFocus] = useState();
-  const [categories, setCategories] = useState([]);
-  const [active, setActive] = useState();
-  const [initialState, setInitialState] = useState([]);
-  const [productsCtg, setProductsCtg] = useState([]);
-  const [loading, setLoading] = useState(true)
-
-   
-
-  useFocusEffect((
+    const [products, setProducts] = useState([]);
+    const [productsFiltered, setProductsFiltered] = useState([]);
+    const [focus, setFocus] = useState();
+    const [categories, setCategories] = useState([]);
+    const [productsCtg, setProductsCtg] = useState([]);
+    const [active, setActive] = useState();
+    const [initialState, setInitialState] = useState([]);
+    const [loading, setLoading] = useState(true)
+  
+    useFocusEffect((
       useCallback(
         () => {
           setFocus(false);
@@ -53,12 +50,12 @@ const ProductContainer = (props) => {
           
           // Products
           axios
-            .get(`${baseURL}/products/`)
-            .then((respone) => {
-              setProducts(respone.data);
-              setProductsFiltered(respone.data);
-              setProductsCtg(respone.data);
-              setInitialState(respone.data);
+            .get(`${baseURL}/products`)
+            .then((res) => {
+              setProducts(res.data);
+              setProductsFiltered(res.data);
+              setProductsCtg(res.data);
+              setInitialState(res.data);
               setLoading(false)
             })
             .catch((error) => {
@@ -70,13 +67,10 @@ const ProductContainer = (props) => {
             .get(`${baseURL}/categories`)
             .then((res) => {
               setCategories(res.data)
-              console.log(res.data)
             })
             .catch((error) => {
               console.log('Api call error')
             })
-
-            
       
           return () => {
             setProducts([]);
@@ -90,20 +84,24 @@ const ProductContainer = (props) => {
         [],
       )
     ))
+      
+     
+    
   
-  const searchProduct = (text) => {
+    // Product Methods
+    const searchProduct = (text) => {
       setProductsFiltered(
         products.filter((i) => i.name.toLowerCase().includes(text.toLowerCase()))
       );
     };
-
-  const openList = () => {
-    setFocus(true);
-  }
-
-  const onBlur = () => {
-    setFocus(false);
-  }
+  
+    const openList = () => {
+      setFocus(true);
+    };
+  
+    const onBlur = () => {
+      setFocus(false);
+    };
   
     // Categories
     const changeCtg = (ctg) => {
@@ -112,16 +110,12 @@ const ProductContainer = (props) => {
           ? [setProductsCtg(initialState), setActive(true)]
           : [
               setProductsCtg(
-                products.filter((i) => {
-                  i.category._id === ctg,
-                  console.log(i.category._id)
-                }),
+                products.filter((i) => i.category._id === ctg),
                 setActive(true)
               ),
             ];
       }
     };
-  
 
  
   return (
@@ -173,18 +167,19 @@ const ProductContainer = (props) => {
                 Sản phẩm chính hãng T3O Store
               </Text>    
               </View>
+              {console.log(productsCtg.length)}
               {productsCtg.length > 0 ? (
-              <View style={styles.listContainer}>
-                  {productsCtg.map((item) => {
-                      return(
-                          <ProductList
-                              navigation={props.navigation}
-                              key={item.name}
-                              item={item}
-                          />
-                      )
-                  })}
-                </View>
+             <View style={styles.listContainer}>
+                {productsCtg.map((item) => {
+                    return(
+                        <ProductList
+                            navigation={props.navigation}
+                            key={item.name}
+                            item={item}
+                        />
+                    )
+                })}
+            </View>
               ) : (
                 <View style={styles.center, { height: '40%'}}>
                   <Text>Không tìm thấy sản phẩm nào!</Text>
