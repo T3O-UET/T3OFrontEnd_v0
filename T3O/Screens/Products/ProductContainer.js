@@ -96,48 +96,46 @@ const ProductContainer = (props) => {
         products.filter((i) => i.name.toLowerCase().includes(text.toLowerCase()))
       );
     };
-  
-    const openList = () => {
-      setFocus(true);
-    };
-  
-    const onBlur = () => {
-      setFocus(false);
-    };
-  
-    // Categories
-    const changeCtg = (ctg) => {
-      {
-        ctg === "all"
-          ? [setProductsCtg(initialState), setActive(true)]
-          : [
-              setProductsCtg(
-                products.filter((i) => {
-                  i.category._id === ctg
-                  // console.log(i.category._id)
-                }
-                ),
-                setActive(true)
-              ),
-            ];
-      }
-    };
 
- 
+  const openList = () => {
+    setFocus(true);
+  }
+
+  const onBlur = () => {
+    setFocus(false);
+  }
+  // const _onFocus = () => {
+  
+  // }
+  // Categories
+  const changeCtg = (ctg) => {
+    {
+      ctg === "all"
+        ? [setProductsCtg(initialState), setActive(true)]
+        : [
+            setProductsCtg(
+              products.filter((i) => i.category._id === ctg),
+              setActive(true),
+             
+            ),
+          ];
+    }
+    // console.log(ctg)
+  };
+
+  // console.log(productsCtg)
+  // console.log(categories)
   return (
     <>
     {loading == false ? (
       <Container>
-        <ScrollView>
-          <View>
+      <ScrollView>
+      <View>
             <SearchBar
               showLoading={false}
               platform={Platform.OS}
-              // clearIcon={true}
-              // value={search}
               inputStyle={{backgroundColor: '#EEEEEE', marginLeft: 12}}
               containerStyle={{backgroundColor: 'white'}}
-              // placeholderTextColor={'#g5g5g5'}
               style={styles.searchBar}
               searchIcon={{ size: 30 }}
               placeholder="Search"
@@ -159,36 +157,43 @@ const ProductContainer = (props) => {
               <View>
                 <Banner />
               </View>
+              
               <View>
-                <CategoryFilter
-                  categories={categories}
-                  categoryFilter={changeCtg}
-                  productsCtg={productsCtg}
-                  active={active}
-                  setActive={setActive}
-                />
+              <CategoryFilter
+                categories={categories}
+                categoryFilter={changeCtg}
+                productsCtg={productsCtg}
+                active={active}
+                setActive={setActive}
+              />
               </View>
               <View>
-              <Text>
-                Sản phẩm chính hãng T3O Store
-              </Text>    
+              <MarqueeText
+                style={{ paddingTop: 5, paddingBottom: 5, fontSize: 22 }}
+                duration={100000}
+                marqueeOnStart
+                loop
+                marqueeDelay={2000}
+                marqueeResetDelay={1000}
+              >
+              Sản phẩm chính hãng T3O Store
+              </MarqueeText>   
               </View>
-              {/* {console.log(productsCtg.length)} */}
               {productsCtg.length > 0 ? (
-             <View style={styles.listContainer}>
-                {productsCtg.map((item) => {
-                    return(
-                        <ProductList
-                            navigation={props.navigation}
-                            key={item.name}
-                            item={item}
-                        />
-                    )
-                })}
-            </View>
+              <View style={styles.listContainer}>
+                  {productsCtg.map((item) => {
+                      return(
+                          <ProductList
+                              navigation={props.navigation}
+                              key={item.name}
+                              item={item}
+                          />
+                      )
+                  })}
+                </View>
               ) : (
-                <View style={styles.center, { height: '40%'}}>
-                  <Text>Không tìm thấy sản phẩm nào!</Text>
+                <View style={styles.center, { height: height/2}}>
+                  <Text>Không có sản phẩm nào</Text>
                 </View>
               )}
               <View style={styles.listContainer}>
