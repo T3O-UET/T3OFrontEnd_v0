@@ -44,13 +44,8 @@ const Login = (props) => {
     }
 
     return (
-        <Formik
-            initialValues={{
-                email: "",
-                password: "",
-            }}
-            validationSchema={formSchema}>
-            { (props) => (
+       
+           
                 <FormContainer title={"Login"}>
                     <Input
                     placeholder={"Nhập Email"}
@@ -86,11 +81,8 @@ const Login = (props) => {
                         <Text style={{ color: "white" }}>Đăng ký</Text>
                         </MyButton>
                     </View>
-                </FormContainer>
-            )}      
-        </Formik>
+                </FormContainer>         
     )
-
 }
 
 const styles = StyleSheet.create({
