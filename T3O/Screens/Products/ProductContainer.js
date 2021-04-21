@@ -55,7 +55,7 @@ const ProductContainer = (props) => {
               setProducts(res.data);
               setProductsFiltered(res.data);
               setProductsCtg(res.data);
-              console.log(res.data);
+              // console.log(res.data);
               setInitialState(res.data);
               setLoading(false)
             })
@@ -67,7 +67,8 @@ const ProductContainer = (props) => {
           axios
             .get(`${baseURL}/categories`)
             .then((res) => {
-              setCategories(res.data)
+              setCategories(res.data),
+              console.log(res.data)
             })
             .catch((error) => {
               console.log('Api call error')
@@ -112,8 +113,8 @@ const ProductContainer = (props) => {
           : [
               setProductsCtg(
                 products.filter((i) => {
-                  i.category._id === ctg,
-                  console.log( i.category._id)
+                  i.category._id === ctg
+                  // console.log(i.category._id)
                 }
                 ),
                 setActive(true)
@@ -172,7 +173,7 @@ const ProductContainer = (props) => {
                 Sản phẩm chính hãng T3O Store
               </Text>    
               </View>
-              {console.log(productsCtg.length)}
+              {/* {console.log(productsCtg.length)} */}
               {productsCtg.length > 0 ? (
              <View style={styles.listContainer}>
                 {productsCtg.map((item) => {
