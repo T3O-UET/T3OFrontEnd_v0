@@ -97,6 +97,7 @@ const styles = StyleSheet.create({
         width: width / 2 - 20 - 10
     },
     title: {
+        marginTop: 10,
         fontWeight: 'bold',
         fontSize: 18,
         // textAlign: 'left',
