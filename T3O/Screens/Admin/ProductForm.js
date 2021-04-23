@@ -66,7 +66,6 @@ const ProductForm = (props) => {
         axios
             .get(`${baseURL}/categories`)
             .then((res) => setCategories(res.data))
-            .then(console.log(`${baseURL}/categories`))
             .catch((error) => alert("Lỗi load category"));
 
         // Image Picker
@@ -140,6 +139,7 @@ const ProductForm = (props) => {
         }
 
         if(item !== null) {
+            console.log(formData)
             axios
             .put(`${baseURL}/products/${item.id}`, formData, config)
             .then(console.log(`${baseURL}/products/${item.id}`))
@@ -192,7 +192,7 @@ const ProductForm = (props) => {
     }
 
     return (
-       <FormContainer title="Thêm sản phẩm mới" style={{paddingBottom: 20}}>
+       <FormContainer>
            <View style={styles.imageContainer}>
                <Image style={styles.image} source={{uri: mainImage}}/>
                <TouchableOpacity onPress={pickImage} style={styles.imagePicker}>
@@ -265,7 +265,7 @@ const ProductForm = (props) => {
                     onValueChange={(e) => [setPickerValue(e), setCategory(e)]}
                 >
                     {categories.map((c) => {
-                        console.log(c.name)
+                        // console.log(c.name)
                         return <Picker.Item key={c.id} label={c.name} value={c.id} />
                     })}
                 </Picker>

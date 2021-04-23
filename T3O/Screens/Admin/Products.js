@@ -109,7 +109,7 @@ const Products = (props) => {
                 onPress={() => props.navigation.navigate("Orders")}
             >
                 <Icon name="shopping-bag" size={18} color="white" />
-                <Text style={styles.buttonText}>Orders</Text>
+                <Text style={styles.buttonText}>Đơn hàng</Text>
             </MyButton>
             <MyButton
                 secondary
@@ -117,7 +117,7 @@ const Products = (props) => {
                 onPress={() => props.navigation.navigate("ProductForm")}
             >
                 <Icon name="plus" size={18} color="white" />
-                <Text style={styles.buttonText}>Products</Text>
+                <Text style={styles.buttonText}>Sản phẩm</Text>
             </MyButton>
             <MyButton
                 secondary
@@ -125,7 +125,7 @@ const Products = (props) => {
                 onPress={() => props.navigation.navigate("Categories")}
             >
                 <Icon name="plus" size={18} color="white" />
-                <Text style={styles.buttonText}>Categories</Text>
+                <Text style={styles.buttonText}>Thương hiệu</Text>
             </MyButton>
         </View>
       <View>

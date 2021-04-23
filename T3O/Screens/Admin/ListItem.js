@@ -56,7 +56,7 @@ const ListItem = (props) => {
                         <MyButton 
                         medium 
                         danger
-                        onPress={() => [props.delete(props._id), setModalVisible(false)]}
+                        onPress={() => [props.delete(props.id), setModalVisible(false)]}
                         >
                             <Text style={styles.textStyle}>Xóa</Text>
                         </MyButton>
