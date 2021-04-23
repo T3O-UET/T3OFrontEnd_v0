@@ -67,8 +67,8 @@ const ProductContainer = (props) => {
           axios
             .get(`${baseURL}/categories`)
             .then((res) => {
-              setCategories(res.data),
-              console.log(res.data)
+              setCategories(res.data)
+              // console.log(res.data)
             })
             .catch((error) => {
               console.log('Api call error')

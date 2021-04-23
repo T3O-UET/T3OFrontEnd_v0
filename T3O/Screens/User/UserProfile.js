@@ -29,14 +29,12 @@ const UserProfile = (props) => {
         AsyncStorage.getItem("jwt")
             .then((res) => {
                 const AuthStr = 'Bearer '.concat(res); 
-                axios.get(`${baseURL}/users/${context.stateUser.user.userId}`, { headers: { Authorization: AuthStr } })
+                axios.get(`${baseURL}/users/getCurrentUser`, { headers: { Authorization: AuthStr } })
                     .then((user) => setUserProfile(user.data))
                     .then(res => {
                         // If request is good...
                         console.log("Good request "+res.data);
                     })
-                    .then(console.log("URL: "+`${baseURL}/users/${context.stateUser.user.userId}`))
-                    .then(console.log("Token after login function called "+res))
                     .catch((error) => {
                         console.log('error ' + error);
                     });

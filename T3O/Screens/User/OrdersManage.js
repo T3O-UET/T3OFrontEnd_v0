@@ -12,7 +12,7 @@ import AuthGlobal from "../../Context/store/AuthGlobal"
 import { logoutUser } from "../../Context/actions/Auth.actions"
 import { useEffect } from 'react/cjs/react.development';
 
-const UserProfile = (props) => {
+const OrdersManage = (props) => {
     const context = useContext(AuthGlobal)
     const [userProfile, setUserProfile] = useState()
     const [orders, setOrders] = useState()
@@ -29,18 +29,18 @@ const UserProfile = (props) => {
         AsyncStorage.getItem("jwt")
             .then((res) => {
                 axios
-                    .get(`${baseURL}/users/${context.stateUser.user.userId}`, {
+                    .get(`${baseURL}/users/getCurrentUser`, {
                         headers: { Authorization: `Bearer ${res}` },
                     })
                     .then((user) => setUserProfile(user.data))
             })
-            .then(console.log(`${baseURL}/users/${context.stateUser.user.userId}`))
+            // .then(console.log(`${baseURL}/users/${context.stateUser.user.userId}`))
             .catch((error) => console.log(error))
 
         axios
         .get(`${baseURL}/orders`)
-        .then(console.log(`${baseURL}/orders`))
-        .then(console.log(context.stateUser.user.userId))
+        // .then(console.log(`${baseURL}/orders`))
+        // .then(console.log(context.stateUser.user.userId))
         .then((x) => {
             const data = x.data;
             console.log(data);
@@ -98,4 +98,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default UserProfile;
+export default OrdersManage;
