@@ -22,7 +22,7 @@ const SingleProduct = (props) => {
             setAvailabilityText("Số lượng giới hạn")
         } else {
             setAvailability(<TrafficLight available></TrafficLight>);
-            setAvailabilityText("Hàng có sãn")
+            setAvailabilityText("Hàng có sẵn")
         }
 
         return () => {

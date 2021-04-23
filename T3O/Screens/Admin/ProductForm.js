@@ -66,7 +66,8 @@ const ProductForm = (props) => {
         axios
             .get(`${baseURL}/categories`)
             .then((res) => setCategories(res.data))
-            .catch((error) => alert("Error to load categories"));
+            .then(console.log(`${baseURL}/categories`))
+            .catch((error) => alert("Lỗi load category"));
 
         // Image Picker
         (async () => {
@@ -75,7 +76,7 @@ const ProductForm = (props) => {
                     status,
                 } = await ImagePicker.requestCameraPermissionsAsync();
                 if (status !== "granted") {
-                    alert("Sorry, we need camera roll permissions to make this work!")
+                    alert("Xin lỗi chúng tôi cần quyền truy cập camera!")
                 }
             }
         })();
@@ -108,7 +109,7 @@ const ProductForm = (props) => {
             category == "" ||
             countInStock == ""
         ) {
-            setError("Please fill in the form correctly")
+            setError("Vui lòng điền đẩy đủ các mục!")
         }
 
         let formData = new FormData();
@@ -141,12 +142,13 @@ const ProductForm = (props) => {
         if(item !== null) {
             axios
             .put(`${baseURL}/products/${item.id}`, formData, config)
+            .then(console.log(`${baseURL}/products/${item.id}`))
             .then((res) => {
                 if(res.status == 200 || res.status == 201) {
                     Toast.show({
                         topOffset: 60,
                         type: "success",
-                        text1: "Product successfuly updated",
+                        text1: "Đã được cập nhật!",
                         text2: ""
                     });
                     setTimeout(() => {
@@ -158,8 +160,8 @@ const ProductForm = (props) => {
                 Toast.show({
                     topOffset: 60,
                         type: "error",
-                        text1: "Something went wrong",
-                        text2: "Please try again"
+                        text1: "Opps, có lỗi đã xảy ra,",
+                        text2: "Xin vui lòng thử lại."
                 })
             })
         } else {
@@ -170,7 +172,7 @@ const ProductForm = (props) => {
                     Toast.show({
                         topOffset: 60,
                         type: "success",
-                        text1: "New Product added",
+                        text1: "Sản phẩm mới đã được thêm",
                         text2: ""
                     });
                     setTimeout(() => {
@@ -182,15 +184,15 @@ const ProductForm = (props) => {
                 Toast.show({
                     topOffset: 60,
                         type: "error",
-                        text1: "Something went wrong",
-                        text2: "Please try again"
+                        text1: "Opps, có lỗi xảy ra,",
+                        text2: "Xin vui lòng thử lại."
                 })
             })
         } 
     }
 
     return (
-       <FormContainer title="Add Product">
+       <FormContainer title="Thêm sản phẩm mới" style={{paddingBottom: 20}}>
            <View style={styles.imageContainer}>
                <Image style={styles.image} source={{uri: mainImage}}/>
                <TouchableOpacity onPress={pickImage} style={styles.imagePicker}>
@@ -198,7 +200,7 @@ const ProductForm = (props) => {
                </TouchableOpacity>
            </View>
            <View style={styles.label}>
-               <Text style={{ textDecorationLine: "underline"}}>Brand</Text>
+               <Text style={styles.title}>Nhãn hiệu</Text>
            </View>
            <Input 
             placeholder="Brand"
@@ -208,7 +210,7 @@ const ProductForm = (props) => {
             onChangeText={(text) => setBrand(text)}
            />
            <View style={styles.label}>
-               <Text style={{ textDecorationLine: "underline"}}>Name</Text>
+               <Text style={styles.title}>Tên giày</Text>
            </View>
            <Input 
             placeholder="Name"
@@ -218,7 +220,7 @@ const ProductForm = (props) => {
             onChangeText={(text) => setName(text)}
            />
             <View style={styles.label}>
-               <Text style={{ textDecorationLine: "underline"}}>Price</Text>
+               <Text style={styles.title}>Giá</Text>
            </View>
            <Input 
             placeholder="Price"
@@ -229,7 +231,7 @@ const ProductForm = (props) => {
             onChangeText={(text) => setPrice(text)}
            />
             <View style={styles.label}>
-               <Text style={{ textDecorationLine: "underline"}}>Count in Stock</Text>
+               <Text style={styles.title}>Số lượng</Text>
            </View>
            <Input 
             placeholder="Stock"
@@ -240,7 +242,7 @@ const ProductForm = (props) => {
             onChangeText={(text) => setCountInStock(text)}
            />
             <View style={styles.label}>
-               <Text style={{ textDecorationLine: "underline"}}>Description</Text>
+               <Text style={styles.title}>Mô tả sản phẩm</Text>
            </View>
            <Input 
             placeholder="Description"
@@ -249,30 +251,37 @@ const ProductForm = (props) => {
             value={description}
             onChangeText={(text) => setDescription(text)}
            />
+           <View style={styles.label}>
+               <Text style={styles.title}>Lựa chọn danh mục</Text>
+           </View>
+           <View  style={{marginTop: 10, paddingLeft: 10, paddingRight: 20 , borderWidth: 2, borderColor: '#D6D5D5', borderRadius: 20 }}>
            <Item picker>
                 <Picker
                     mode="dropdown"
                     iosIcon={<Icon color={"#007aff"} name="arrow-down" />}
-                    style={{ width: undefined }}
+                    style={{width: 250, height: 50, color: 'black'}}
                     placeholder="Select your Category"
                     selectedValue={pickerValue}
-                    placeholderStyle={{ color: "#007aff"}}
-                    placeholderIconColor="#007aff"
                     onValueChange={(e) => [setPickerValue(e), setCategory(e)]}
                 >
                     {categories.map((c) => {
+                        console.log(c.name)
                         return <Picker.Item key={c.id} label={c.name} value={c.id} />
                     })}
                 </Picker>
            </Item>
+           </View>
+           
            {err ? <Error message={err} /> : null}
            <View style={styles.buttonContainer}>
                <MyButton
                 large
-                primary
+                primary 
+                style={{backgroundColor: '#36CBDA', 
+                borderRadius: 20}} 
                 onPress={() => addProduct()}               
                >
-                   <Text style={styles.buttonText}>Confirm</Text>
+                   <Text style={styles.buttonText}>Xác nhận</Text>
                </MyButton>
            </View>
        </FormContainer>
@@ -317,6 +326,10 @@ const styles = StyleSheet.create({
         padding: 8,
         borderRadius: 100,
         elevation: 20
+    },
+    title: {
+        fontSize: 16,
+        fontWeight: 'bold'
     }
 })
 
