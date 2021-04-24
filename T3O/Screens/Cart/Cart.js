@@ -1,4 +1,4 @@
-import React from 'react'
+import React , { useContext } from 'react'
 import { Text, View, Dimensions, StyleSheet, Button, TouchableOpacity } from 'react-native'
 import {
     Container,
@@ -16,12 +16,16 @@ import { connect } from 'react-redux'
 import { SwipeListView } from 'react-native-swipe-list-view'
 import CartItem from './CartItem';
 
+import AuthGlobal from '../../Context/store/AuthGlobal'
 import * as actions from '../../Redux/Actions/cartActions'
+import MyButton from '../../Shared/MyButton'
 // import { ScrollView } from 'react-native-gesture-handler'
 
 var {height, width } = Dimensions.get("window")
 
 const Cart = (props) => {
+
+    const context = useContext(AuthGlobal);
     var total = 0;
     props.cartItems.forEach(cart => {
         return (total += cart.product.price)        
@@ -80,7 +84,11 @@ const Cart = (props) => {
                         />
                     </Right>
                     <Right  style={{ paddingRight: 20}}>
-                        <Button title="Kiểm tra" onPress={() => props.navigation.navigate("Checkout")} />
+                        {context.stateUser.isAuthenticated ? (
+                            <Button title="Kiểm tra" onPress={() => props.navigation.navigate("Checkout")} />
+                        ) : (
+                            <Button title="Login" onPress={() => props.navigation.navigate('Login')} />
+                        )}
                     </Right>
                 </View>
             </Container>

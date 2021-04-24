@@ -10,7 +10,8 @@ import {
 } from 'native-base'
 import { connect } from 'react-redux'
 import * as actions from '../../../Redux/Actions/cartActions'
-
+import axios from "axios"
+import baseURL from "../../../assets/common/baseUrl"
 import Toast from "react-native-toast-message"
 
 var { width, height } = Dimensions.get('window')
@@ -18,14 +19,42 @@ var { width, height } = Dimensions.get('window')
 
 const Confirm = (props) => {
 
-    const confirm = props.route.params;
+    const finalOrder = props.route.params;
 
     const confirmOrder = () => {
-        setTimeout(() => {
-            props.clearCart();
-            props.navigation.navigate("Cart")
+
+        const order = finalOrder.order.order;
+
+        axios
+        .post(`${baseURL}/orders/`, order)
+        .then(console.log(`${baseURL}/orders/`))
+        .then(console.log(order))
+        .then((res) => {
+            if (res.status == 200 || res.status == 201) {
+                Toast.show({
+                    topOffset: 60,
+                    type: "success",
+                    text1: "Thêm đơn hàng thành công",
+                    text2: "",
+                })
+                setTimeout(() => {
+                    props.clearCart();
+                    props.navigation.navigate("Cart")
+                }, 500)
+            }
         })
+        .catch((error) => {
+            Toast.show({
+                topOffset: 60,
+                type: "error",
+                text1: "Opps, có lỗi xảy ra,",
+                text2: "Vui lòng thử lại.",
+            })
+        })
+
+        
     }
+
 
     return(
         <ScrollView contentContainerStyle={styles.container}>
@@ -37,13 +66,13 @@ const Confirm = (props) => {
                 <View style={{  backgroundColor: '#F0EEEE', borderRadius: 18}}>
                     <Text style={styles.title}>Giao hàng đến:</Text>
                     <View style={{ padding: 8, fontSize: 18 }}>
-                        <Text>Địa chỉ 1: {confirm.order.order.shippingAddress1}</Text>
-                        <Text>Địa chỉ 2: {confirm.order.order.shippingAddress2}</Text>
-                        <Text>Thành phố: {confirm.order.order.city}</Text>
-                        <Text>Số điện thoại: {confirm.order.order.phone}</Text>
+                        <Text>Địa chỉ 1: {finalOrder.order.order.shippingAddress1}</Text>
+                        <Text>Địa chỉ 2: {finalOrder.order.order.shippingAddress2}</Text>
+                        <Text>Thành phố: {finalOrder.order.order.city}</Text>
+                        <Text>Số điện thoại: {finalOrder.order.order.phone}</Text>
                     </View>
                     <Text style={styles.title}>Sản phẩm:</Text> 
-                    {confirm.order.order.orderItems.map((x) => {
+                    {finalOrder.order.order.orderItems.map((x) => {
                         return (
                             <ListItem
                                 style={styles.listItem}

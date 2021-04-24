@@ -43,9 +43,9 @@ const OrdersManage = (props) => {
         // .then(console.log(context.stateUser.user.userId))
         .then((x) => {
             const data = x.data;
-            console.log(data);
+            console.log(userProfile._id);
             const userOrders = data.filter(
-                (order) => order.user._id === context.stateUser.user.userId
+                (order) => order.user._id === userProfile._id
             );
             setOrders(userOrders);
         })
