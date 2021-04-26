@@ -36,7 +36,8 @@ const Confirm = (props) => {
             axios
                 .post(`${baseURL}/orders/`, order, { headers: { Authorization: AuthStr } })
                 // .then(console.log(`${baseURL}/orders/`))
-                .then(console.log("final Order "+order))
+                .then(console.log("Final Screen"))
+                .then(console.log(order))
                 .then((res) => {
                     if (res.status == 200 || res.status == 201) {
                         Toast.show({

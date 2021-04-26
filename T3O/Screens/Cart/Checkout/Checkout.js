@@ -25,8 +25,8 @@ const Checkout = (props) => {
    
     useEffect(() => {
         // console.log(context.stateUser.user.id)
-
-        console.log("Check_out_Screen "+props.cartItems)
+        console.log("Checkout Screen")
+        console.log(props.cartItems)
         setOrderItems(props.cartItems)
 
         return () => {

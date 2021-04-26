@@ -28,7 +28,9 @@ const Payment = (props) => {
     const [selected, setSelected] = useState();
     const [card, setCard] = useState();
 
-    console.log("payment_Screen: "+orderPaymentScreen)
+    console.log("Payment Screen")
+
+    console.log(orderPaymentScreen)
     return(
        <Container>
            <Header style={{ height: 70}}>
