@@ -30,7 +30,7 @@ const UserMenu = (props) => {
         AsyncStorage.getItem("jwt")
             .then((res) => {
                 const AuthStr = 'Bearer '.concat(res); 
-                axios.get(`${baseURL}/users/getCurrentUser`, { headers: { Authorization: AuthStr } })
+                axios.get(`${baseURL}/users/getCurrentUser`,  { headers: { Authorization: AuthStr } })
                     .then(
                         (user) => setUserProfile(user.data),
                         // console.log(`${baseURL}/users/${context.stateUser.user.userId}`)

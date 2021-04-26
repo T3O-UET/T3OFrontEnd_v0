@@ -23,8 +23,6 @@ import SearchProduct from './SearchProduct';
 import Banner from '../../Shared/Banner';
 import CategoryFilter from './CategoryFilter';
 import { useFocusEffect } from '@react-navigation/native'
-import MarqueeText from 'react-native-marquee';
-// import HSNZ from "react-native-marquee-scroll";
 
 
 var { height } = Dimensions.get("window")
@@ -168,16 +166,11 @@ const ProductContainer = (props) => {
               />
               </View>
               <View>
-              <MarqueeText
+              <Text
                 style={{ paddingTop: 5, paddingBottom: 5, fontSize: 22 }}
-                duration={100000}
-                marqueeOnStart
-                loop
-                marqueeDelay={2000}
-                marqueeResetDelay={1000}
               >
               Sản phẩm chính hãng T3O Store
-              </MarqueeText>   
+              </Text>   
               </View>
               {productsCtg.length > 0 ? (
               <View style={styles.listContainer}>

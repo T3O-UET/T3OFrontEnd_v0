@@ -23,10 +23,12 @@ const methods = [
 
 const Payment = (props) => {
 
-    const order = props.route.params;
+    const orderPaymentScreen = props.route.params;
 
     const [selected, setSelected] = useState();
     const [card, setCard] = useState();
+
+    console.log("payment_Screen: "+orderPaymentScreen)
     return(
        <Container>
            <Header style={{ height: 70}}>
@@ -65,7 +67,7 @@ const Payment = (props) => {
                <View style={{ marginTop: 60, alignSelf: 'center' }}>
                        <Button 
                        title={"Xác nhận"} 
-                       onPress={() => props.navigation.navigate("Xác nhận", { order })}/>
+                       onPress={() => props.navigation.navigate("Xác nhận", { orderPaymentScreen })}/>
                </View>
            </Content>
        </Container>

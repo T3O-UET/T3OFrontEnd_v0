@@ -30,14 +30,15 @@ const ProductForm = (props) => {
     const [image, setImage] = useState();
     const [mainImage, setMainImage] = useState();
     const [category, setCategory] = useState();
+    const [id, setId] = useState();
     const [categories, setCategories] = useState([]);
     const [token, setToken] = useState();
     const [err, setError] = useState();
     const [countInStock, setCountInStock] = useState();
-    const [rating, setRating] = useState(0);
+    // const [rating, setRating] = useState(0);
     const [isFeatured, setIsFeature] = useState(false);
-    const [richDescription, setRichDescription] = useState();
-    const [numReviews, setNumReviews] = useState(0);
+    // const [richDescription, setRichDescription] = useState();
+    // const [numReviews, setNumReviews] = useState(0);
     const [item, setItem] = useState(null);
 
     useEffect(() => {
@@ -45,6 +46,7 @@ const ProductForm = (props) => {
         if(!props.route.params) {
             setItem(null);
         } else {
+            setId(props.route.params.item.id);
             setItem(props.route.params.item);
             setBrand(props.route.params.item.brand);
             setName(props.route.params.item.name);
@@ -52,7 +54,7 @@ const ProductForm = (props) => {
             setDescription(props.route.params.item.description);
             setMainImage(props.route.params.item.image);
             setImage(props.route.params.item.image);
-            setCategory(props.route.params.item.category._id);
+            setCategory(props.route.params.item.category.id);
             setCountInStock(props.route.params.item.countInStock.toString());
         }
 
@@ -126,9 +128,10 @@ const ProductForm = (props) => {
         formData.append("description", description);
         formData.append("category", category);
         formData.append("countInStock", countInStock);
-        formData.append("richDescription", richDescription);
-        formData.append("rating", rating);
-        formData.append("numReviews", numReviews);
+        formData.append("id", id);
+        // formData.append("richDescription", richDescription);
+        // formData.append("rating", rating);
+        // formData.append("numReviews", numReviews);
         formData.append("isFeatured", isFeatured);
 
         const config = {
@@ -143,6 +146,7 @@ const ProductForm = (props) => {
             axios
             .put(`${baseURL}/products/${item.id}`, formData, config)
             .then(console.log(`${baseURL}/products/${item.id}`))
+            .then(console.log(formData))
             .then((res) => {
                 if(res.status == 200 || res.status == 201) {
                     Toast.show({

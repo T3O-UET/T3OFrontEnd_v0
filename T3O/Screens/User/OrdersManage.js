@@ -29,7 +29,7 @@ const OrdersManage = (props) => {
         AsyncStorage.getItem("jwt")
             .then((res) => {
                 axios
-                    .get(`${baseURL}/users/getCurrentUser`, {
+                    .get(`${baseURL}/users/getCurrentUser/`, {
                         headers: { Authorization: `Bearer ${res}` },
                     })
                     .then((user) => setUserProfile(user.data))
@@ -38,14 +38,14 @@ const OrdersManage = (props) => {
             .catch((error) => console.log(error))
 
         axios
-        .get(`${baseURL}/orders`)
+        .get(`${baseURL}/orders/`)
         // .then(console.log(`${baseURL}/orders`))
         // .then(console.log(context.stateUser.user.userId))
         .then((x) => {
             const data = x.data;
-            console.log(userProfile._id);
+            console.log(userProfile.id);
             const userOrders = data.filter(
-                (order) => order.user._id === userProfile._id
+                (order) => order.user.id === userProfile.id
             );
             setOrders(userOrders);
         })

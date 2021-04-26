@@ -1,12 +1,15 @@
-import React from 'react'
+import React , { useContext } from 'react'
 import { createStackNavigator } from "@react-navigation/stack"
 
 import Cart from '../Screens/Cart/Cart'
 import CheckoutNavigator from './CheckoutNavigator'
+import Login from '../Screens/User/Login'
+import AuthGlobal from '../Context/store/AuthGlobal'
 
 const Stack = createStackNavigator();
 
 function MyStack() {
+    const context = useContext(AuthGlobal);
     return(
         <Stack.Navigator>
             <Stack.Screen 
@@ -23,6 +26,16 @@ function MyStack() {
                     title: 'Thông tin'
                 }}
             />
+            {context.stateUser.isAuthenticated ? 
+                null: (
+                <Stack.Screen
+                name="Login"
+                component={Login}
+                options={{
+                    headerShown: false
+                }}
+                 />
+            )}
         </Stack.Navigator>
     )
 }

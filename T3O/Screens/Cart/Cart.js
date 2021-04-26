@@ -31,26 +31,10 @@ const Cart = (props) => {
         return (total += cart.product.price)        
     });
     return (
-        // <View style={{ flex: 1}}>
-        //     {props.cartItems.map(x => {
-        //         return (
-        //             <Text>{x.product.name}</Text>
-        //         )
-        //     })}
-        // </View>
         <>
         {props.cartItems.length ? (
             <Container>
                 <H1  style={styles.taskbar}>Giỏ hàng của bạn</H1>
-                {/* <ScrollView> */}
-                {/* {props.cartItems.map(data => {
-                    return (
-                    //   <CartItem item={data} />
-
-                    )
-                })} */}
-
-                {/* </ScrollView> */}
                 <SwipeListView
             data={props.cartItems}
             renderItem={(data) => (
@@ -177,11 +161,6 @@ const styles = StyleSheet.create({
         width: width / 1.2
     }
 })
-const mapStateProps = (state) => {
-    const { cartItems } = state;
-    return {
-        cartItems: cartItems,
-    }
-}
 
-export default connect(mapStateProps, mapDispatchToProps)(Cart);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Cart);
