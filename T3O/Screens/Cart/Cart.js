@@ -35,7 +35,7 @@ const Cart = (props) => {
         {props.cartItems.length ? (
             <Container>
                 <H1  style={styles.taskbar}>Giỏ hàng của bạn</H1>
-                <SwipeListView
+                <SwipeListView    
             data={props.cartItems}
             renderItem={(data) => (
              <CartItem item={data} />

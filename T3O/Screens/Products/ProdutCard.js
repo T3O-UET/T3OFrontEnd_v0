@@ -18,6 +18,8 @@ var { width } = Dimensions.get("window");
 const ProductCard = (props) => {
     const { name, price, image, countInStock } = props;
 
+    console.log("Product card")
+    console.log(props)
     return (
         <View style={styles.container}>
             <Image 

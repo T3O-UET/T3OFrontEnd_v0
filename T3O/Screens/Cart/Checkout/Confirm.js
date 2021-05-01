@@ -88,18 +88,18 @@ const Confirm = (props) => {
                         return (
                             <ListItem
                                 style={styles.listItem}
-                                key={x.product.name}
+                                key={x.name}
                                 avatar
                             >
                                 <Left>
-                                    <Thumbnail style={{ height: 80, width: 120, }} source={{ uri: x.product.image}}/>
+                                    <Thumbnail style={{ height: 80, width: 120, }} source={{ uri: x.image}}/>
                                 </Left>
                                 <Body style={styles.body}>
                                     <Left>
-                                        <Text>{x.product.name}</Text>
+                                        <Text>{x.name}</Text>
                                     </Left>
                                     <Right>
-                                        <Text style={{color: 'red', fontWeight: 'bold'}}>$ {x.product.price}</Text>
+                                        <Text style={{color: 'red', fontWeight: 'bold'}}>$ {x.price}</Text>
                                     </Right>
                                 </Body>
                             </ListItem>

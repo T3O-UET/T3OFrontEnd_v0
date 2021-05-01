@@ -21,16 +21,35 @@ const Checkout = (props) => {
     // const [selected, setSelected] = useState();
     // const [card, setCard] = useState();
 
+    var cart = []
+    var Item = function(id, quantity, name, image, price){
+        this.id = id
+        this.quantity = quantity
+        this.name = name
+        this.image = image
+        this.price = price
+    }
 
+    // console.log("Cart Item")
+    // console.log(props.cartItems)
+    props.cartItems.forEach(item => {
+        // console.log("This Item")
+        // console.log(item.product.id)
+        var quantity = 1
+        var item = new Item(item.product.id, quantity, item.product.name, item.product.image, item.product.price) 
+        cart.push(item)
+    });
    
+    console.log("My New Cart Id")
+    console.log(cart)
     useEffect(() => {
         // console.log(context.stateUser.user.id)
         console.log("Checkout Screen")
-        console.log(props.cartItems)
-        setOrderItems(props.cartItems)
+        // console.log(props.cartItems)
+        // setOrderItems(props.cartItems)
 
         return () => {
-            setOrderItems();
+            // setOrderItems();
             setUserId(context.stateUser.user.id)
             // console.log(userProfile.name);
             // setUserId();
@@ -41,7 +60,7 @@ const Checkout = (props) => {
         let order = {
             city,
             dateOrdered: Date.now(),
-            orderItems,
+            orderItems: cart,
             phone,
             shippingAddress1: address,
             shippingAddress2: address2,
