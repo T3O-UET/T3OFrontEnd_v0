@@ -18,8 +18,8 @@ var { width } = Dimensions.get("window");
 const ProductCard = (props) => {
     const { name, price, image, countInStock } = props;
 
-    console.log("Product card")
-    console.log(props)
+    // console.log("Product card")
+    // console.log(props)
     return (
         <View style={styles.container}>
             <Image 
@@ -57,7 +57,7 @@ const ProductCard = (props) => {
                                 </View>
                             </TouchableOpacity>
                         </View>
-                    ) : <Text style={{ marginTop: 20 }}>Currently Unavailable</Text>
+                    ) : <Text style={{ marginTop: 20 }}>Hiện tại hết hàng!</Text>
                 }
             </View>           
         </View>

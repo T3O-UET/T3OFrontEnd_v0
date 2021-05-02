@@ -10,6 +10,8 @@ import {
     Right,
     Left,
     Picker,
+    Icon,
+    Body,
     Title
 } from 'native-base';
 
@@ -21,10 +23,14 @@ const methods = [
 
 const Payment = (props) => {
 
-    const order = props.route.params;
+    const orderPaymentScreen = props.route.params;
 
     const [selected, setSelected] = useState();
     const [card, setCard] = useState();
+
+    console.log("Payment Screen")
+
+    console.log(orderPaymentScreen)
     return(
        <Container>
            <Header style={{ height: 70}}>
@@ -36,7 +42,7 @@ const Payment = (props) => {
                        <ListItem key={item.name} onPress={() => setSelected(item.value)}>
                            <Left>
                             <Text style={{ fontWeight: 'bold', fontSize: 20}}>{item.name}</Text>
-                           </Left> 
+                           </Left>
                            <Right>
                                <Radio selected={selected == item.value}/>
                            </Right>
@@ -53,9 +59,9 @@ const Payment = (props) => {
                         style={{ height: 50, width: 200, color: 'blue'}}
                         onValueChange={(x) => setCard(x)}
                     >
-                        <Picker.Item key="bidv" label="BIDV" value="bidv" />
-                        <Picker.Item key="techcombank" label="Techcombank" value="techcombank"/>      
-                        <Picker.Item key="vietcombank" label="Vietcombank" value="vietcombank"/> 
+                        <Picker.Item label="BIDV" value="bidv" />
+                        <Picker.Item label="Techcombank" value="techcombank" />      
+                        <Picker.Item label="Vietcombank" value="vietcombank"/> 
                     </Picker>
                  </View>  
                 
@@ -63,7 +69,7 @@ const Payment = (props) => {
                <View style={{ marginTop: 60, alignSelf: 'center' }}>
                        <Button 
                        title={"Xác nhận"} 
-                       onPress={() => props.navigation.navigate("Xác nhận", { order })}/>
+                       onPress={() => props.navigation.navigate("Xác nhận", { orderPaymentScreen })}/>
                </View>
            </Content>
        </Container>

@@ -13,9 +13,13 @@ import * as actions from '../../../Redux/Actions/cartActions'
 import axios from "axios"
 import baseURL from "../../../assets/common/baseUrl"
 import Toast from "react-native-toast-message"
+import AsyncStorage from "@react-native-community/async-storage"
+
+
 
 
 var { width, height } = Dimensions.get('window')
+
 
 const Confirm = (props) => {
 
@@ -23,13 +27,19 @@ const Confirm = (props) => {
 
     const confirmOrder = () => {
 
-        const order = finalOrder.order.order;
+        const order = finalOrder.orderPaymentScreen.order;
         
-        axios
-            .post(`${baseURL}/orders/`, order )
-            .then(console.log(order))
-            .then((res) => {
-                if (res.status == 200 || res.status == 201) {
+        
+        AsyncStorage.getItem("jwt")
+        .then((res) => {
+            const AuthStr = 'Bearer '.concat(res); 
+            axios
+                .post(`${baseURL}/orders/`, order, { headers: { Authorization: AuthStr } })
+                // .then(console.log(`${baseURL}/orders/`))
+                .then(console.log("Final Screen"))
+                .then(console.log(order))
+                .then((res) => {
+                    if (res.status == 200 || res.status == 201) {
                         Toast.show({
                             topOffset: 60,
                             type: "success",
@@ -42,14 +52,19 @@ const Confirm = (props) => {
                         }, 500)
                     }
                 })
-            .catch((error) => {
+                .catch((error) => {
                     Toast.show({
                         topOffset: 60,
                         type: "error",
                         text1: "Opps, có lỗi xảy ra,",
                         text2: "Vui lòng thử lại.",
                     })
-                })         
+                })
+        })
+        .catch((error) => console.log(error))
+
+        
+        
     }
 
 
@@ -63,28 +78,28 @@ const Confirm = (props) => {
                 <View style={{  backgroundColor: '#F0EEEE', borderRadius: 18}}>
                     <Text style={styles.title}>Giao hàng đến:</Text>
                     <View style={{ padding: 8, fontSize: 18 }}>
-                        <Text>Địa chỉ 1: {finalOrder.order.order.shippingAddress1}</Text>
-                        <Text>Địa chỉ 2: {finalOrder.order.order.shippingAddress2}</Text>
-                        <Text>Thành phố: {finalOrder.order.order.city}</Text>
-                        <Text>Số điện thoại: {finalOrder.order.order.phone}</Text>
+                        <Text>Địa chỉ 1: {finalOrder.orderPaymentScreen.order.shippingAddress1}</Text>
+                        <Text>Địa chỉ 2: {finalOrder.orderPaymentScreen.order.shippingAddress2}</Text>
+                        <Text>Thành phố: {finalOrder.orderPaymentScreen.order.city}</Text>
+                        <Text>Số điện thoại: {finalOrder.orderPaymentScreen.order.phone}</Text>
                     </View>
                     <Text style={styles.title}>Sản phẩm:</Text> 
-                    {finalOrder.order.order.products.map((x) => {
+                    {finalOrder.orderPaymentScreen.order.orderItems.map((x) => {
                         return (
                             <ListItem
                                 style={styles.listItem}
-                                key={x.product.name}
+                                key={x.name}
                                 avatar
                             >
                                 <Left>
-                                    <Thumbnail style={{ height: 80, width: 120, }} source={{ uri: x.product.image}}/>
+                                    <Thumbnail style={{ height: 80, width: 120, }} source={{ uri: x.image}}/>
                                 </Left>
                                 <Body style={styles.body}>
                                     <Left>
-                                        <Text>{x.product.name}</Text>
+                                        <Text>{x.name}</Text>
                                     </Left>
                                     <Right>
-                                        <Text style={{color: 'red', fontWeight: 'bold'}}>$ {x.product.price}</Text>
+                                        <Text style={{color: 'red', fontWeight: 'bold'}}>$ {x.price}</Text>
                                     </Right>
                                 </Body>
                             </ListItem>
